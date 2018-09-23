@@ -1,0 +1,14 @@
+C:\Users\emand\Desktop\WebProjects\forex-experiment\bin\Debug\netcoreapp2.1\forex-experiment.deps.json
+C:\Users\emand\Desktop\WebProjects\forex-experiment\bin\Debug\netcoreapp2.1\forex-experiment.runtimeconfig.json
+C:\Users\emand\Desktop\WebProjects\forex-experiment\bin\Debug\netcoreapp2.1\forex-experiment.runtimeconfig.dev.json
+C:\Users\emand\Desktop\WebProjects\forex-experiment\bin\Debug\netcoreapp2.1\forex-experiment.dll
+C:\Users\emand\Desktop\WebProjects\forex-experiment\bin\Debug\netcoreapp2.1\forex-experiment.pdb
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.csprojAssemblyReference.cache
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.csproj.CoreCompileInputs.cache
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.RazorAssemblyInfo.cache
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.RazorAssemblyInfo.cs
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.AssemblyInfoInputs.cache
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.AssemblyInfo.cs
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.RazorTargetAssemblyInfo.cache
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.dll
+C:\Users\emand\Desktop\WebProjects\forex-experiment\obj\Debug\netcoreapp2.1\forex-experiment.pdb

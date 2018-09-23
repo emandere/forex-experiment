@@ -1,0 +1,33 @@
+
+<mat-sidenav-container class="example-container">
+    
+    <mat-sidenav #drawer mode="side"  mode="over">
+        <mat-toolbar color="primary">
+                <button mat-icon-button (click)="drawer.toggle()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+        </mat-toolbar>
+        
+        <mat-nav-list>
+                <a mat-list-item >
+                        <mat-icon mat-list-icon>settings_input_composite</mat-icon>
+                        <h4 mat-line>Create Experiment</h4>
+                </a>
+                <a mat-list-item >
+                        <mat-icon mat-list-icon>dashboard</mat-icon>
+                        <h4 mat-line>Analysis</h4>
+                </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button mat-icon-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="title">Forex Strategy Sessions</span>
+        </mat-toolbar>
+        <textarea #test1 matInput placeholder="{{ getState() | async }}"></textarea>
+        <button mat-button (click)="changeState()">Hey!</button>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
