@@ -18,7 +18,7 @@ export class AppComponent {
   changeState()
   {
      let state:string = this.stateString.value;
-     this.stateString.next(state+"n");
+     this.stateString.next(state+"qqq");
   }
 
 }
