@@ -10,6 +10,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MatInputModule} from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {MatInputModule} from '@angular/material/input';
     MatInputModule,
     MatListModule,
     MatIconModule,
+    HttpClientModule,
     MatSidenavModule
   ],
   providers: [],
