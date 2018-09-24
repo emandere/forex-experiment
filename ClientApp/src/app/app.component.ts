@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'material-project';
   
-  private stateString:BehaviorSubject<string> = new BehaviorSubject("Start yyyy");
+  private stateString:BehaviorSubject<string> = new BehaviorSubject("Start");
  
   constructor(private http:HttpClient){}
   getState():Observable<string>{
