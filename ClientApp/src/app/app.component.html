@@ -26,8 +26,13 @@
             </button>
             <span class="title">Forex Strategy Sessions</span>
         </mat-toolbar>
-        <textarea #test1 matInput placeholder="{{ getState() | async }}"></textarea>
-        <button mat-button (click)="changeState()">Hey!</button>
+        <mat-form-field>
+            <mat-select placeholder="Indicator">
+                <mat-option *ngFor="let indicator of indicators" [value]="indicator">
+                    {{indicator}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </mat-sidenav-content>
 </mat-sidenav-container>
 

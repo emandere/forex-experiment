@@ -12,22 +12,25 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'material-project';
   
-  private stateString:BehaviorSubject<string> = new BehaviorSubject("Start");
+  private stateString:BehaviorSubject<string[]>;
+  private indicators:string[];
  
-  constructor(private http:HttpClient){}
-  getState():Observable<string>{
-    return this.stateString.asObservable();
+  constructor(private http:HttpClient)
+  {
+   
+  }
+  
+  ngOnInit(){
+    this.SetIndicators();
   }
 
-
-  changeState()
+ 
+  SetIndicators()
   {
-    let state:string = this.stateString.value;
-    this.http.get<string[]>('api/values').subscribe(result => {
-      this.stateString.next(state+result[0]);
-    }, error => console.error(error));
-
-     
+    //let state:string = this.stateString.value;
+    this.http.get<string[]>('http://localhost:122/api/forexclasses/v1/rules').subscribe(result => {
+      this.indicators=result
+    }, error => console.error(error));    
      
   }
 
