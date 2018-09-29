@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,15 +14,22 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import { CreateExperimentComponent } from './create-experiment/create-experiment.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateExperimentComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot([
+      { path: '', component: CreateExperimentComponent,pathMatch: 'full' },
+      { path: 'create-experiment', component: CreateExperimentComponent }
+    ]),
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -31,6 +39,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HttpClientModule,
     MatSidenavModule,
     MatSelectModule,
+    MatCardModule,
     MatFormFieldModule
   ],
   providers: [],

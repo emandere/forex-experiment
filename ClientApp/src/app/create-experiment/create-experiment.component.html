@@ -1,0 +1,48 @@
+<br/>
+<mat-card class="experiment-card">
+    <mat-card-header>
+      <mat-card-title>Create Experiment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content align="left">
+      <mat-form-field>
+          <input matInput placeholder="Start Date" value="20170601">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="End Date" value="20171101">
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="Indicator">
+              <mat-option *ngFor="let indicator of indicators" [value]="indicator">
+                  {{indicator}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <br/>
+      <mat-form-field>
+          <input matInput placeholder="Window {Start|Stop|Inc} or [A,B]" value="15">
+      </mat-form-field>
+      <br/>
+      <mat-form-field>
+          <input matInput placeholder="Units {Start|Stop|Inc} or [A,B]" value="2000">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+          <input matInput placeholder="Stop Loss {Start|Stop|Inc} or [A,B]" value="1.0">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Take Profit {Start|Stop|Inc} or [A,B]" value="1.0">
+      </mat-form-field>
+     <br/>
+      <mat-form-field>
+          <mat-select placeholder="Position"  multiple>
+            <mat-option >long</mat-option>
+            <mat-option >short</mat-option>
+          </mat-select>
+      </mat-form-field>  
+
+
+    </mat-card-content>
+    <mat-card-actions align="right">
+            <button mat-button>Create</button>
+    </mat-card-actions>
+</mat-card>

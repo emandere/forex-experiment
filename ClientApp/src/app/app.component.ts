@@ -12,8 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'material-project';
   
-  private stateString:BehaviorSubject<string[]>;
-  private indicators:string[];
+  
  
   constructor(private http:HttpClient)
   {
@@ -21,17 +20,10 @@ export class AppComponent {
   }
   
   ngOnInit(){
-    this.SetIndicators();
+    
   }
 
  
-  SetIndicators()
-  {
-    //let state:string = this.stateString.value;
-    this.http.get<string[]>('http://localhost:122/api/forexclasses/v1/rules').subscribe(result => {
-      this.indicators=result
-    }, error => console.error(error));    
-     
-  }
+  
 
 }

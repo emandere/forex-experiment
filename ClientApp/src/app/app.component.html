@@ -26,13 +26,9 @@
             </button>
             <span class="title">Forex Strategy Sessions</span>
         </mat-toolbar>
-        <mat-form-field>
-            <mat-select placeholder="Indicator">
-                <mat-option *ngFor="let indicator of indicators" [value]="indicator">
-                    {{indicator}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div class="content fit" align="center">
+                <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
 
