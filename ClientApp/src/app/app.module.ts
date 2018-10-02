@@ -16,6 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import { CreateExperimentComponent } from './create-experiment/create-experiment.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
+import { reducers, metaReducers } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { AppEffects } from './store/effects/app.effects';
 
 
 @NgModule({
@@ -40,7 +47,10 @@ import { CreateExperimentComponent } from './create-experiment/create-experiment
     MatSidenavModule,
     MatSelectModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AppEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
   bootstrap: [AppComponent]
