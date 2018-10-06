@@ -21,7 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { AppEffects } from './store/effects/app.effects';
+import { IndicatorsEffects } from './store/effects/indicators.effects';
 
 
 @NgModule({
@@ -48,7 +48,7 @@ import { AppEffects } from './store/effects/app.effects';
     MatCardModule,
     MatFormFieldModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([IndicatorsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],

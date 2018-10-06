@@ -27,8 +27,9 @@ export class CreateExperimentComponent implements OnInit {
   }
 
   SetIndicators() {
-    this.indicators$ = this.indicatorService.getIndicators();
-       
+    //this.indicators$ = this.indicatorService.getIndicators();
+    this.store.dispatch(new indicatorActions.LoadGetindicators());
+    this.indicators$ = this.store.select(fromState.getIndicators)   
      
   }
 

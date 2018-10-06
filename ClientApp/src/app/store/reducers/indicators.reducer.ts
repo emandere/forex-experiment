@@ -13,8 +13,8 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: indicatorActions.IndicatorActions): State {
   switch (action.type) {
-    case indicatorActions.GetindicatorsActionTypes.LoadGetindicators:
-      return handleLoadIndicators(state,action);
+    case indicatorActions.GetindicatorsActionTypes.SetIndicators:
+      return handleSetIndicators(state,action);
     default:
       return state;
   }
@@ -24,5 +24,12 @@ function handleLoadIndicators(state: State, action: indicatorActions.LoadGetindi
   return {
     ...state,
     indicatorNames: ["hello","world"]
+  };
+}
+
+function handleSetIndicators(state: State, action: indicatorActions.SetIndicators): State {
+  return {
+    ...state,
+    indicatorNames: action.payload
   };
 }
