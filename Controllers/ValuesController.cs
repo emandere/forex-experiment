@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using forex_experiment.Models;
 
 namespace forex_experiment.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -26,8 +28,17 @@ namespace forex_experiment.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] string value)
         {
+            return Ok(JsonConvert.SerializeObject(value + "added"));
+        }
+
+        // POST api/values
+        [HttpPost]
+        [ActionName("createexperiment")]
+        public ActionResult CreateExperiment([FromBody] ForexExperiment experiment)
+        {
+            return Ok(JsonConvert.SerializeObject(experiment.Indicator + "added"));
         }
 
         // PUT api/values/5

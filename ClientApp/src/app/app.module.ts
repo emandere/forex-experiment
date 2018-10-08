@@ -10,6 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +23,7 @@ import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { IndicatorsEffects } from './store/effects/indicators.effects';
+import { ExperimentEffects } from './store/effects/experiment.effects';
 
 
 @NgModule({
@@ -47,8 +49,9 @@ import { IndicatorsEffects } from './store/effects/indicators.effects';
     MatSelectModule,
     MatCardModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([IndicatorsEffects]),
+    EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
