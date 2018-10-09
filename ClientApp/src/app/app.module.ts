@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{ MatButtonModule, MatListModule } from "@angular/material";
@@ -50,6 +51,7 @@ import { ExperimentEffects } from './store/effects/experiment.effects';
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []

@@ -38,7 +38,7 @@ namespace forex_experiment.Controllers
         [ActionName("createexperiment")]
         public ActionResult CreateExperiment([FromBody] ForexExperiment experiment)
         {
-            return Ok(JsonConvert.SerializeObject(experiment.Indicator + "added"));
+            return Ok(JsonConvert.SerializeObject($"{experiment.StartDate} {experiment.Indicator} added"));
         }
 
         // PUT api/values/5

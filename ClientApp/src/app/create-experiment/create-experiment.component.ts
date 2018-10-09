@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import {Observable} from 'rxjs/Rx';
 import {MatSnackBar} from '@angular/material';
+import { FormControl } from '@angular/forms';
 
 
  
@@ -23,6 +24,9 @@ import {Experiment} from '../models/experiment'
 export class CreateExperimentComponent implements OnInit {
   indicators$: Observable<string[]>; 
   experimentSentResult$: Observable<string>; 
+  indicator:string='';
+  startdate:string='20160101';
+ 
   
   constructor(private store: Store<fromState.State>,
     private indicatorService:IndicatorService,
@@ -44,7 +48,8 @@ export class CreateExperimentComponent implements OnInit {
   {
      let experiment = new Experiment;
      experiment.Name ="Cmon";
-     experiment.Indicator="RSIOverbought70";
+     experiment.Indicator=this.indicator;
+     experiment.StartDate=this.startdate;
      this.store.dispatch(new experimentActions.SendNewExperiment(experiment));//SendNewExperimentResponse
      //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing!"));//SendNewExperimentResponse
      //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing2!"));

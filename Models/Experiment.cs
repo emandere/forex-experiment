@@ -4,5 +4,6 @@ namespace forex_experiment.Models
     {
         public string Name { get; set; }
         public string Indicator{get;set;}
+        public string StartDate{get;set;}
     }
 }
