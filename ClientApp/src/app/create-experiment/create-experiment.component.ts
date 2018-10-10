@@ -26,6 +26,7 @@ export class CreateExperimentComponent implements OnInit {
   experimentSentResult$: Observable<string>; 
   indicator:string='';
   startdate:string='20160101';
+  window:string='';
  
   
   constructor(private store: Store<fromState.State>,
@@ -50,6 +51,7 @@ export class CreateExperimentComponent implements OnInit {
      experiment.Name ="Cmon";
      experiment.Indicator=this.indicator;
      experiment.StartDate=this.startdate;
+     experiment.Window=this.window.split('|');
      this.store.dispatch(new experimentActions.SendNewExperiment(experiment));//SendNewExperimentResponse
      //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing!"));//SendNewExperimentResponse
      //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing2!"));
