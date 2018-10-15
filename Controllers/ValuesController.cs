@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using forex_experiment.Models;
+using forex_experiment.Repository;
 
 namespace forex_experiment.Controllers
 {
@@ -12,6 +13,11 @@ namespace forex_experiment.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IForexRepository _forexRepository;
+        public ValuesController(IForexRepository forexRepository)
+        {
+            _forexRepository=forexRepository;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -36,8 +42,9 @@ namespace forex_experiment.Controllers
         // POST api/values
         [HttpPost]
         [ActionName("createexperiment")]
-        public ActionResult CreateExperiment([FromBody] ForexExperiment experiment)
+        public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
         {
+            await _forexRepository.AddExperiment(experiment);
             return Ok(JsonConvert.SerializeObject($"{experiment.StartDate} {experiment.Indicator} {experiment.Window[0]} added"));
         }
 
