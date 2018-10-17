@@ -24,9 +24,11 @@ import {Experiment} from '../models/experiment'
 export class CreateExperimentComponent implements OnInit {
   indicators$: Observable<string[]>; 
   experimentSentResult$: Observable<string>; 
+  name:string='';
   indicator:string='';
   startdate:string='20160101';
   window:string='';
+  
  
   
   constructor(private store: Store<fromState.State>,
@@ -48,7 +50,7 @@ export class CreateExperimentComponent implements OnInit {
   submitNewExperiment()
   {
      let experiment = new Experiment;
-     experiment.Name ="Cmon";
+     experiment.Name =this.name;
      experiment.Indicator=this.indicator;
      experiment.StartDate=this.startdate;
      experiment.Window=this.window.split('|');
