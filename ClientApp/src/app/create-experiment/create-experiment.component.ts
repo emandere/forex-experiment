@@ -49,18 +49,25 @@ export class CreateExperimentComponent implements OnInit {
 
   submitNewExperiment()
   {
-     let experiment = new Experiment;
-     experiment.Name =this.name;
-     experiment.Indicator=this.indicator;
-     experiment.StartDate=this.startdate;
-     experiment.Window=this.window.split('|');
-     this.store.dispatch(new experimentActions.SendNewExperiment(experiment));//SendNewExperimentResponse
-     //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing!"));//SendNewExperimentResponse
-     //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing2!"));
-     this.store.select(fromState.getExperimentSentResult).subscribe(
-        result=>this.snackbar.open("Experiment",result,{ duration: 5000 })
-     );
-     this.experimentSentResult$=this.store.select(fromState.getExperimentSentResult);
+    let experiment = new Experiment;
+    experiment.Name =this.name;
+    experiment.Indicator=this.indicator;
+    experiment.StartDate=this.startdate;
+    if(this.window.includes(","))
+      experiment.Window={staticOptions:this.window.split(','),min:"",max:"",increment:""};
+
+    if(this.window.includes("|"))
+    {
+        let parms = this.window.split('|');
+        experiment.Window={staticOptions:[],min:parms[0],max:parms[1],increment:parms[2]};
+    }   
+    this.store.dispatch(new experimentActions.SendNewExperiment(experiment));//SendNewExperimentResponse
+    //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing!"));//SendNewExperimentResponse
+    //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing2!"));
+    this.store.select(fromState.getExperimentSentResult).subscribe(
+      result=>this.snackbar.open("Experiment",result,{ duration: 5000 })
+    );
+    this.experimentSentResult$=this.store.select(fromState.getExperimentSentResult);
      
   }
 

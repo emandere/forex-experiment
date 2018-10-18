@@ -45,7 +45,7 @@ namespace forex_experiment.Controllers
         public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
         {
             await _forexRepository.AddExperiment(experiment);
-            return Ok(JsonConvert.SerializeObject($"{experiment.StartDate} {experiment.Indicator} {experiment.Window[0]} added"));
+            return Ok(JsonConvert.SerializeObject($"{experiment.Name} added"));
         }
 
         // PUT api/values/5

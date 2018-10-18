@@ -1,9 +1,8 @@
-using MongoDB.Driver.Builders;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 namespace forex_experiment.Models
 {
+   
     public class ForexExperiment
     {
         public ObjectId Id { get; set; }
@@ -14,6 +13,6 @@ namespace forex_experiment.Models
         [BsonElement("startdate")]
         public string StartDate{get;set;}
          [BsonElement("window")]
-        public string [] Window{get;set;}
+        public Variable Window{get;set;}
     }
 }
