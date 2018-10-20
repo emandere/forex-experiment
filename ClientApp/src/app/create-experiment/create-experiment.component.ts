@@ -24,10 +24,10 @@ import {Experiment} from '../models/experiment'
 export class CreateExperimentComponent implements OnInit {
   indicators$: Observable<string[]>; 
   experimentSentResult$: Observable<string>; 
-  name:string='';
+  name:string='NewExperiment';
   indicator:string='';
   startdate:string='20160101';
-  window:string='';
+  window:string='14';
   
  
   

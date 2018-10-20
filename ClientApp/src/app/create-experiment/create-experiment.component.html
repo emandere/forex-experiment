@@ -7,6 +7,13 @@
       <mat-form-field>
                 <input matInput [(ngModel)]="name" placeholder="Name">
       </mat-form-field> 
+      <mat-form-field>
+        <mat-select [(value)]="indicator" placeholder="Indicator">
+            <mat-option *ngFor="let indicator of indicators$ | async" [value]="indicator">
+                {{indicator}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
       <br/> 
       <mat-form-field>
           <input matInput [(ngModel)]="startdate" placeholder="Start Date" value="20170601">
@@ -14,22 +21,16 @@
       <mat-form-field>
           <input matInput placeholder="End Date" value="20171101">
       </mat-form-field>
-      <mat-form-field>
-          <mat-select [(value)]="indicator" placeholder="Indicator">
-              <mat-option *ngFor="let indicator of indicators$ | async" [value]="indicator">
-                  {{indicator}}
-              </mat-option>
-          </mat-select>
-      </mat-form-field>
+      
       <br/>
       <mat-form-field>
           <input matInput [(ngModel)]="window" placeholder="Window {Start|Stop|Inc} or [A,B]" value="15">
       </mat-form-field>
-      <br/>
       <mat-form-field>
-          <input matInput placeholder="Units {Start|Stop|Inc} or [A,B]" value="2000">
+        <input matInput placeholder="Units {Start|Stop|Inc} or [A,B]" value="2000">
       </mat-form-field>
-      <br>
+      <br/>
+      
       <mat-form-field>
           <input matInput placeholder="Stop Loss {Start|Stop|Inc} or [A,B]" value="1.0">
       </mat-form-field>
