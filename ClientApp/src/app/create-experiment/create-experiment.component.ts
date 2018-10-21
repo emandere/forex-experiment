@@ -53,6 +53,7 @@ export class CreateExperimentComponent implements OnInit {
     experiment.Name =this.name;
     experiment.Indicator=this.indicator;
     experiment.StartDate=this.startdate;
+    
     if(this.window.includes(","))
       experiment.Window={staticOptions:this.window.split(','),min:"",max:"",increment:""};
 
@@ -60,6 +61,10 @@ export class CreateExperimentComponent implements OnInit {
     {
         let parms = this.window.split('|');
         experiment.Window={staticOptions:[],min:parms[0],max:parms[1],increment:parms[2]};
+    }
+    else
+    {
+      experiment.Window={staticOptions:[this.window],min:"",max:"",increment:""};
     }   
     this.store.dispatch(new experimentActions.SendNewExperiment(experiment));//SendNewExperimentResponse
     //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing!"));//SendNewExperimentResponse
