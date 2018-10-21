@@ -11,7 +11,7 @@ import * as fromState from '../store/reducers';
 import * as experimentActions from '../store/actions/submitexperiment.actions';
 import * as indicatorActions from '../store/actions/getindicators.actions';
 import {IndicatorService} from '../services/indicator.service'
-import {Experiment} from '../models/experiment'
+import {Experiment, Variable} from '../models/experiment'
 
 
 
@@ -53,27 +53,28 @@ export class CreateExperimentComponent implements OnInit {
     experiment.Name =this.name;
     experiment.Indicator=this.indicator;
     experiment.StartDate=this.startdate;
-    
-    if(this.window.includes(","))
-      experiment.Window={staticOptions:this.window.split(','),min:"",max:"",increment:""};
-
-    if(this.window.includes("|"))
-    {
-        let parms = this.window.split('|');
-        experiment.Window={staticOptions:[],min:parms[0],max:parms[1],increment:parms[2]};
-    }
-    else
-    {
-      experiment.Window={staticOptions:[this.window],min:"",max:"",increment:""};
-    }   
-    this.store.dispatch(new experimentActions.SendNewExperiment(experiment));//SendNewExperimentResponse
-    //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing!"));//SendNewExperimentResponse
-    //this.store.dispatch(new experimentActions.SendNewExperimentResponse("Testing2!"));
+    experiment.Window = this.updateVariable(this.window);
+    this.store.dispatch(new experimentActions.SendNewExperiment(experiment));
     this.store.select(fromState.getExperimentSentResult).subscribe(
       result=>this.snackbar.open("Experiment",result,{ duration: 5000 })
     );
     this.experimentSentResult$=this.store.select(fromState.getExperimentSentResult);
      
+  }
+
+  updateVariable(parms:String)
+  {
+    if(parms.includes(","))
+        return {staticOptions:this.window.split(','),min:"",max:"",increment:""};
+
+    if(this.window.includes("|"))
+    {
+        return {staticOptions:[],min:parms[0],max:parms[1],increment:parms[2]};
+    }
+    else
+    {
+        return {staticOptions:[this.window],min:"",max:"",increment:""};
+    }
   }
 
 }
