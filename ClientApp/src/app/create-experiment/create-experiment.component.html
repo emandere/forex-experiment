@@ -19,7 +19,7 @@
           <input matInput [(ngModel)]="startdate" placeholder="Start Date" value="20170601">
       </mat-form-field>
       <mat-form-field>
-          <input matInput placeholder="End Date" value="20171101">
+          <input matInput [(ngModel)]="enddate" placeholder="End Date" value="20171101">
       </mat-form-field>
       
       <br/>
@@ -27,21 +27,22 @@
           <input matInput [(ngModel)]="window" placeholder="Window {Start|Stop|Inc} or [A,B]" value="15">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Units {Start|Stop|Inc} or [A,B]" value="2000">
+        <input matInput [(ngModel)]="units" placeholder="Units {Start|Stop|Inc} or [A,B]" value="2000">
       </mat-form-field>
       <br/>
       
       <mat-form-field>
-          <input matInput placeholder="Stop Loss {Start|Stop|Inc} or [A,B]" value="1.0">
+          <input matInput [(ngModel)]="stoploss" placeholder="Stop Loss {Start|Stop|Inc} or [A,B]" value="1.0">
       </mat-form-field>
       <mat-form-field>
-          <input matInput placeholder="Take Profit {Start|Stop|Inc} or [A,B]" value="1.0">
+          <input matInput [(ngModel)]="takeprofit" placeholder="Take Profit {Start|Stop|Inc} or [A,B]" value="1.0">
       </mat-form-field>
      <br/>
-      <mat-form-field>
-          <mat-select placeholder="Position"  multiple>
-            <mat-option >long</mat-option>
-            <mat-option >short</mat-option>
+      <mat-form-field >
+          <mat-select placeholder="Position" [(ngModel)]="position">
+            <mat-option *ngFor="let localposition of positions" [value]="localposition.value">
+                {{localposition.viewValue}}
+              </mat-option>
           </mat-select>
       </mat-form-field>  
 

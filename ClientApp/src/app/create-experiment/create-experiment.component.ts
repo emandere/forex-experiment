@@ -11,7 +11,7 @@ import * as fromState from '../store/reducers';
 import * as experimentActions from '../store/actions/submitexperiment.actions';
 import * as indicatorActions from '../store/actions/getindicators.actions';
 import {IndicatorService} from '../services/indicator.service'
-import {Experiment, Variable} from '../models/experiment'
+import {Experiment, Variable, StrategyPosition} from '../models/experiment'
 
 
 
@@ -27,7 +27,16 @@ export class CreateExperimentComponent implements OnInit {
   name:string='NewExperiment';
   indicator:string='';
   startdate:string='20160101';
+  enddate:string='20170101';
   window:string='14';
+  units:string='2000';
+  stoploss:string='1.0';
+  takeprofit:string='1.0';
+  position:string='';
+  positions:StrategyPosition[]=[
+    {value: 'long', viewValue: 'long'},
+    {value: 'short', viewValue: 'short'}
+  ];
   
  
   
@@ -53,7 +62,13 @@ export class CreateExperimentComponent implements OnInit {
     experiment.Name =this.name;
     experiment.Indicator=this.indicator;
     experiment.StartDate=this.startdate;
+    experiment.EndDate=this.enddate;
+    experiment.Position = this.position;
     experiment.Window = this.updateVariable(this.window);
+    experiment.Units = this.updateVariable(this.units);
+    experiment.StopLoss = this.updateVariable(this.stoploss);
+    experiment.TakeProfit = this.updateVariable(this.takeprofit);
+    
     this.store.dispatch(new experimentActions.SendNewExperiment(experiment));
     this.store.select(fromState.getExperimentSentResult).subscribe(
       result=>this.snackbar.open("Experiment",result,{ duration: 5000 })
@@ -62,18 +77,19 @@ export class CreateExperimentComponent implements OnInit {
      
   }
 
-  updateVariable(parms:String)
+  updateVariable(parms:string)
   {
     if(parms.includes(","))
-        return {staticOptions:this.window.split(','),min:"",max:"",increment:""};
+        return {staticOptions:parms.split(','),min:"",max:"",increment:""};
 
-    if(this.window.includes("|"))
+    if(parms.includes("|"))
     {
-        return {staticOptions:[],min:parms[0],max:parms[1],increment:parms[2]};
+        let args = parms.split('|');
+        return {staticOptions:[],min:args[0],max:args[1],increment:args[2]};
     }
     else
     {
-        return {staticOptions:[this.window],min:"",max:"",increment:""};
+        return {staticOptions:[parms],min:"",max:"",increment:""};
     }
   }
 
