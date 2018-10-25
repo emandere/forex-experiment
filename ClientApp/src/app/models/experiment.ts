@@ -1,9 +1,9 @@
-export class Variable
+export class Variable<T>
 {
-    staticOptions:string[];
-    min:string;
-    max:string;
-    increment:string;
+    staticOptions:T[];
+    min:T;
+    max:T;
+    increment:T;
 }
 export class Experiment
 {
@@ -12,10 +12,10 @@ export class Experiment
    StartDate:string;
    EndDate:string;
    Position:string;
-   Window:Variable;
-   Units:Variable;
-   StopLoss:Variable;
-   TakeProfit:Variable;
+   Window:Variable<number>;
+   Units:Variable<number>;
+   StopLoss:Variable<number>;
+   TakeProfit:Variable<number>;
    
 }
 

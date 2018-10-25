@@ -64,10 +64,10 @@ export class CreateExperimentComponent implements OnInit {
     experiment.StartDate=this.startdate;
     experiment.EndDate=this.enddate;
     experiment.Position = this.position;
-    experiment.Window = this.updateVariable(this.window);
-    experiment.Units = this.updateVariable(this.units);
-    experiment.StopLoss = this.updateVariable(this.stoploss);
-    experiment.TakeProfit = this.updateVariable(this.takeprofit);
+    experiment.Window = this.updateVariableT(this.window,parseInt);
+    experiment.Units = this.updateVariableT(this.units,parseFloat);
+    experiment.StopLoss = this.updateVariableT(this.stoploss,parseFloat);
+    experiment.TakeProfit = this.updateVariableT(this.takeprofit,parseFloat);
     
     this.store.dispatch(new experimentActions.SendNewExperiment(experiment));
     this.store.select(fromState.getExperimentSentResult).subscribe(
@@ -77,19 +77,20 @@ export class CreateExperimentComponent implements OnInit {
      
   }
 
-  updateVariable(parms:string)
+
+  updateVariableT(parms:string,parseFunc:(n:string)=>any)
   {
     if(parms.includes(","))
-        return {staticOptions:parms.split(','),min:"",max:"",increment:""};
+        return {staticOptions:parms.split(',').map(parseFunc),min:0,max:0,increment:0};
 
     if(parms.includes("|"))
     {
         let args = parms.split('|');
-        return {staticOptions:[],min:args[0],max:args[1],increment:args[2]};
+        return {staticOptions:[],min:parseFunc(args[0]),max:parseFunc(args[1]),increment:parseFunc(args[2])};
     }
     else
     {
-        return {staticOptions:[parms],min:"",max:"",increment:""};
+        return {staticOptions:[parseFunc(parms)],min:0,max:0,increment:0};
     }
   }
 
