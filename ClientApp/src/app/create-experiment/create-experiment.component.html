@@ -8,12 +8,9 @@
                 <input matInput [(ngModel)]="name" placeholder="Name">
       </mat-form-field> 
       <mat-form-field>
-        <mat-select [(value)]="indicator" placeholder="Indicator">
-            <mat-option *ngFor="let indicator of indicators$ | async" [value]="indicator">
-                {{indicator}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+        <input matInput [(ngModel)]="startamount" placeholder="Funds">
+      </mat-form-field>
+      
       <br/> 
       <mat-form-field>
           <input matInput [(ngModel)]="startdate" placeholder="Start Date" value="20170601">
@@ -45,7 +42,13 @@
               </mat-option>
           </mat-select>
       </mat-form-field>  
-
+      <mat-form-field>
+        <mat-select [(value)]="indicator" placeholder="Indicator">
+            <mat-option *ngFor="let indicator of indicators$ | async" [value]="indicator">
+                {{indicator}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
       
     </mat-card-content>
     <mat-card-actions align="right">

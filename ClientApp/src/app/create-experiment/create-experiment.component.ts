@@ -30,6 +30,7 @@ export class CreateExperimentComponent implements OnInit {
   enddate:string='20170101';
   window:string='14';
   units:string='2000';
+  startamount:string='2000';
   stoploss:string='1.0';
   takeprofit:string='1.0';
   position:string='';

@@ -12,6 +12,7 @@ export class Experiment
    StartDate:string;
    EndDate:string;
    Position:string;
+   StartAmount:number;
    Window:Variable<number>;
    Units:Variable<number>;
    StopLoss:Variable<number>;
