@@ -45,6 +45,19 @@ namespace forex_experiment.Controllers
         public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
         {
             await _forexRepository.AddExperiment(experiment);
+            List<Strategy> _strategies = experiment.GetStrategies();
+            foreach(Strategy _strategy in _strategies)
+            {
+                TradingSession session = new TradingSession();
+                session.Name = experiment.Name+"_0";
+                session.StartDate = experiment.StartDate;
+                session.EndDate = experiment.EndDate;
+                session.TradingStrategy = _strategy;
+                session.Read = false;
+                session.StartAmount = 2000.0;
+                await _forexRepository.PushTradingStrategySession(session);
+            }
+
             return Ok(JsonConvert.SerializeObject($"{experiment.Name} added"));
         }
 

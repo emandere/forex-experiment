@@ -1,7 +1,7 @@
-using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using forex_experiment.Models;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace forex_experiment.Repository
@@ -27,5 +27,13 @@ namespace forex_experiment.Repository
             await _context.Experiments.InsertOneAsync(item);
             
         }
+
+        public async Task PushTradingStrategySession(TradingSession item)
+        {
+        
+            await _context.TradingSessionQueue.InsertOneAsync(item);
+            
+        }
+
     }    
 }

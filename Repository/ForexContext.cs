@@ -1,6 +1,6 @@
 using MongoDB.Driver;
-using forex_experiment.Models;
 using Microsoft.Extensions.Options;
+using forex_experiment.Models;
 namespace forex_experiment.Repository
 {
     public class ForexContext
@@ -19,6 +19,14 @@ namespace forex_experiment.Repository
             get
             {
                 return _database.GetCollection<ForexExperiment>("experiments");
+            }
+        }
+
+        public IMongoCollection<TradingSession> TradingSessionQueue
+        {
+            get
+            {
+                return _database.GetCollection<TradingSession>("tradingsessionqueue");
             }
         }
     }

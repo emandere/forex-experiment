@@ -9,5 +9,6 @@ namespace forex_experiment.Repository
         //Task<IEnumerable<ForexExperiment>> GetAllNotes();
         Task<IEnumerable<ForexExperiment>> GetAllExperiments();
         Task AddExperiment(ForexExperiment item);
+        Task PushTradingStrategySession(TradingSession item);
     }
 }
