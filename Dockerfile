@@ -11,7 +11,7 @@ COPY . ./
 RUN dotnet build
 RUN dotnet publish -c Release -o out
 
-RUN cd /ClientApp/ && ng build -prod --output-path=/app/ClientApp/dist
+RUN cd /app/ClientApp/ && ng build -prod --output-path=/app/ClientApp/dist
 
 
 # Build runtime image
