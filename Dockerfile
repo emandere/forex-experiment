@@ -15,6 +15,7 @@ RUN npm install -g npm
 RUN npm install
 RUN npm update
 RUN npm install -g @angular/cli
+RUN npm install --save-dev @angular-devkit/build-angular
 RUN cd /app/ClientApp/ && ng build -prod --output-path=/app/ClientApp/dist
 
 RUN dotnet build
