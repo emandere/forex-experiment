@@ -11,6 +11,7 @@ COPY . ./
 RUN dotnet build
 RUN dotnet publish -c Release -o out
 
+RUN npm install -g @angular/cli
 RUN cd /app/ClientApp/ && ng build -prod --output-path=/app/ClientApp/dist
 
 
