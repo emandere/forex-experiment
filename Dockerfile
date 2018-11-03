@@ -11,14 +11,13 @@ COPY . ./
 RUN dotnet build
 RUN dotnet publish -c Release -o out
 
-WORKDIR /app/ClientDist
-RUN ng build -prod --output-path=/app/ClientDist/dist
+RUN cd /ClientApp/ && ng build -prod --output-path=/app/ClientApp/dist
 
 
 # Build runtime image
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
-RUN mkdir /ClientDist
+RUN mkdir /ClientApp
 COPY --from=build-env /app/out .
-COPY --from=build-env /app/ClientDist/dist /app/ClientDist/dist
+COPY --from=build-env /app/ClientApp/dist /app/ClientApp/.
 ENTRYPOINT ["dotnet", "forex-experiment.dll"]
