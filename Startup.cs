@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+
 using forex_experiment.Models;
 using forex_experiment.Repository;
 
@@ -55,7 +56,10 @@ namespace forex_experiment
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseSpaStaticFiles();
+            
             app.UseMvc();
             app.UseSpa(spa =>
             {
