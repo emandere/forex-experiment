@@ -14,7 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y
 #RUN node -v
 RUN cd /app/ClientApp/ && npm install -g npm
 RUN cd /app/ClientApp/ && npm update
-RUN npm run build -- --output-path=./dist/out --configuration production
+RUN cd /app/ClientApp/ && npm run build -- --output-path=./dist/out --configuration production
 #RUN cd /app/ClientApp/ && npm install -g @angular/cli
 #RUN cd /app/ClientApp/ && npm install --save-dev @angular-devkit/build-angular
 #RUN cd /app/ClientApp/ && ng version
