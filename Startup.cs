@@ -29,11 +29,6 @@ namespace forex_experiment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
             services.Configure<Settings>(options =>
             {
                 options.ConnectionString 
@@ -41,8 +36,36 @@ namespace forex_experiment
                 options.Database 
                     = Configuration.GetSection("MongoConnection:Database").Value;
             });
+            ConfigureCommonServices(services);
+            //services.AddTransient<IForexRepository,ForexRepository>();
+        }
+
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.Configure<Settings>(options =>
+            {
+                options.ConnectionString 
+                    = Configuration.GetSection("MongoConnection:ConnectionStringDev").Value;
+                options.Database 
+                    = Configuration.GetSection("MongoConnection:Database").Value;
+            });
+            ConfigureCommonServices(services);
+
+        }
+
+
+        public void ConfigureCommonServices(IServiceCollection services)
+        {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+            
             services.AddTransient<IForexRepository,ForexRepository>();
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
