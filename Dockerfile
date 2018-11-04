@@ -31,5 +31,5 @@ FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 RUN mkdir /ClientApp
 COPY --from=build-env /app/out .
-COPY --from=build-env /app/ClientApp/dist /app/ClientApp/.
+COPY --from=build-env /app/ClientApp/dist /app/ClientApp/dist
 ENTRYPOINT ["dotnet", "forex-experiment.dll"]
