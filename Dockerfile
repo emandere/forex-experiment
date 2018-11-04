@@ -30,6 +30,7 @@ RUN dotnet publish -c Release -o out
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 RUN mkdir /ClientApp
+RUN mkdir /ClientApp/dist
 COPY --from=build-env /app/out .
-COPY --from=build-env /app/ClientApp/dist /app/ClientApp/dist
+COPY --from=build-env /app/ClientApp/dist/. /app/ClientApp/dist
 ENTRYPOINT ["dotnet", "forex-experiment.dll"]
