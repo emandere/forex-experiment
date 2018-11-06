@@ -1,4 +1,4 @@
-FROM forex-experiment-base AS build-env
+FROM emandere/forex-experiment-base AS build-env
 WORKDIR /app
 
 RUN cd /app/ClientApp/ && npm install -g npm
