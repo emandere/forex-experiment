@@ -1,17 +1,6 @@
-FROM microsoft/dotnet:sdk AS build-env
+FROM forex-experiment-base AS build-env
 WORKDIR /app
 
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and buildb
-COPY . ./
-
-RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -yq nodejs build-essential
-#RUN node -v
 RUN cd /app/ClientApp/ && npm install -g npm
 RUN cd /app/ClientApp/ && npm update
 RUN cd /app/ClientApp/ && npm run build -- --output-path=/app/ClientApp/dist --configuration production
@@ -22,7 +11,6 @@ RUN cd /app/ClientApp/ && npm run build -- --output-path=/app/ClientApp/dist --c
 
 RUN dotnet build
 RUN dotnet publish -c Release -o out
-
 
 
 
