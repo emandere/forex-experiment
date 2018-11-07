@@ -1,5 +1,11 @@
 FROM emandere/forex-experiment-base AS build-env
 WORKDIR /app
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and buildb
+COPY . ./
 
 RUN cd /app/ClientApp/ && npm run build -- --output-path=/app/ClientApp/dist --configuration production
 
