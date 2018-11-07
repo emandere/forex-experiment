@@ -25,18 +25,21 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { IndicatorsEffects } from './store/effects/indicators.effects';
 import { ExperimentEffects } from './store/effects/experiment.effects';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateExperimentComponent
+    CreateExperimentComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: CreateExperimentComponent,pathMatch: 'full' },
+      { path: 'analysis', component: AnalysisComponent },
       { path: 'create-experiment', component: CreateExperimentComponent }
     ]),
     MatButtonModule,
