@@ -9,8 +9,9 @@ using forex_experiment.Repository;
 
 namespace forex_experiment.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
+    //[Route("api/[controller]/[action]")]
+    //[ApiController]
+    [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
         private readonly IForexRepository _forexRepository;
@@ -19,17 +20,16 @@ namespace forex_experiment.Controllers
             _forexRepository=forexRepository;
         }
         // GET api/values
-        [HttpGet]
+        [HttpGet("[action]")]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet("[action]")]
+        public async Task<ActionResult<IEnumerable<ForexExperiment>>> GetExperiments()
         {
-            return "value";
+            return Ok(await _forexRepository.GetAllExperiments());
         }
 
         // POST api/values
@@ -39,9 +39,7 @@ namespace forex_experiment.Controllers
             return Ok(JsonConvert.SerializeObject(value + "added"));
         }
 
-        // POST api/values
-        [HttpPost]
-        [ActionName("createexperiment")]
+        [HttpPost("[action]")]
         public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
         {
             await _forexRepository.AddExperiment(experiment);

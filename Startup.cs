@@ -79,11 +79,18 @@ namespace forex_experiment
                 app.UseHsts();
             }
 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+
             //app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseSpaStaticFiles();
             
-            app.UseMvc();
+            
             app.UseSpa(spa =>
             {
             spa.Options.SourcePath = "ClientApp";
@@ -93,6 +100,7 @@ namespace forex_experiment
                 spa.UseAngularCliServer(npmScript: "start");
             }
             });
+
         }
     }
 }

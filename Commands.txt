@@ -1,0 +1,3 @@
+ng generate action store/actions/auth
+ng generate reducer store/reducers/auth --reducers index.ts
+ng generate effect store/effects/auth --module app.module --root true
