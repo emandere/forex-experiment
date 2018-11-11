@@ -60,15 +60,15 @@ export class CreateExperimentComponent implements OnInit {
   submitNewExperiment()
   {
     let experiment = new Experiment;
-    experiment.Name =this.name;
-    experiment.Indicator=this.indicator;
-    experiment.StartDate=this.startdate;
-    experiment.EndDate=this.enddate;
-    experiment.Position = this.position;
-    experiment.Window = this.updateVariableT(this.window,parseInt);
-    experiment.Units = this.updateVariableT(this.units,parseFloat);
-    experiment.StopLoss = this.updateVariableT(this.stoploss,parseFloat);
-    experiment.TakeProfit = this.updateVariableT(this.takeprofit,parseFloat);
+    experiment.name =this.name;
+    experiment.indicator=this.indicator;
+    experiment.startdate=this.startdate;
+    experiment.enddate=this.enddate;
+    experiment.position = this.position;
+    experiment.window = this.updateVariableT(this.window,parseInt);
+    experiment.units = this.updateVariableT(this.units,parseFloat);
+    experiment.stoploss = this.updateVariableT(this.stoploss,parseFloat);
+    experiment.takeprofit = this.updateVariableT(this.takeprofit,parseFloat);
     
     this.store.dispatch(new experimentActions.SendNewExperiment(experiment));
     this.store.select(fromState.getExperimentSentResult).subscribe(

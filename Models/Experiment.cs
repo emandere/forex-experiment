@@ -9,44 +9,44 @@ namespace forex_experiment.Models
     {
         public ObjectId Id { get; set; }
         [BsonElement("name")]
-        public string Name { get; set; }
+        public string name { get; set; }
         [BsonElement("indicator")]
-        public string Indicator{get;set;}
+        public string indicator{get;set;}
         [BsonElement("startdate")]
-        public string StartDate{get;set;}
+        public string startdate{get;set;}
         [BsonElement("enddate")]
-        public string EndDate{get;set;}
+        public string enddate{get;set;}
         [BsonElement("position")]
-        public string Position{get;set;}
+        public string position{get;set;}
         [BsonElement("window")]
-        public Variable<int> Window{get;set;}
+        public Variable<int> window{get;set;}
         [BsonElement("units")]
-        public Variable<int> Units{get;set;}
+        public Variable<int> units{get;set;}
         [BsonElement("stoploss")]
-        public Variable<double> StopLoss{get;set;}
+        public Variable<double> stoploss{get;set;}
         [BsonElement("takeprofit")]
-        public Variable<double> TakeProfit{get;set;}
+        public Variable<double> takeprofit{get;set;}
 
         public List<Strategy> GetStrategies()
         {
             List<Variable> variables = new List<Variable>();
-            Window.name="Window";
-            StopLoss.name ="StopLoss";
-            TakeProfit.name ="TakeProfit";
-            Units.name ="Units";
+            window.name="window";
+            stoploss.name ="stoploss";
+            takeprofit.name ="takeprofit";
+            units.name ="Units";
             
             Variable<string> position = new Variable<string>();
-            position.name="Position";
-            position.staticOptions= new string[]{Position};
+            position.name="position";
+            position.staticOptions= new string[]{ this.position};
 
             Variable<string> RuleName = new Variable<string>();
-            RuleName.name="RuleName";
-            RuleName.staticOptions= new string[]{Indicator};
+            RuleName.name="rulename";
+            RuleName.staticOptions= new string[]{indicator};
 
-            variables.Add(Window);
-            variables.Add(StopLoss);
-            variables.Add(TakeProfit);
-            variables.Add(Units);
+            variables.Add(window);
+            variables.Add(stoploss);
+            variables.Add(takeprofit);
+            variables.Add(units);
             variables.Add(position);
             variables.Add(RuleName);
             

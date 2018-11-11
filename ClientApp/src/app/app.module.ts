@@ -26,13 +26,15 @@ import { environment } from '../environments/environment';
 import { IndicatorsEffects } from './store/effects/indicators.effects';
 import { ExperimentEffects } from './store/effects/experiment.effects';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { ManageExperimentsComponent } from './manage-experiments/manage-experiments.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateExperimentComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    ManageExperimentsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
     RouterModule.forRoot([
       { path: '', component: CreateExperimentComponent,pathMatch: 'full' },
       { path: 'analysis', component: AnalysisComponent },
+      { path: 'manage-experiments', component: ManageExperimentsComponent },
       { path: 'create-experiment', component: CreateExperimentComponent }
     ]),
     MatButtonModule,

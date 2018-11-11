@@ -7,16 +7,16 @@ export class Variable<T>
 }
 export class Experiment
 {
-   Indicator:string;
-   Name:string;
-   StartDate:string;
-   EndDate:string;
-   Position:string;
-   StartAmount:number;
-   Window:Variable<number>;
-   Units:Variable<number>;
-   StopLoss:Variable<number>;
-   TakeProfit:Variable<number>;
+   indicator:string;
+   name:string;
+   startdate:string;
+   enddate:string;
+   position:string;
+   startamount:number;
+   window:Variable<number>;
+   units:Variable<number>;
+   stoploss:Variable<number>;
+   takeprofit:Variable<number>;
    
 }
 

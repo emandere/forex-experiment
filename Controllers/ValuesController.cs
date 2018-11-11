@@ -47,16 +47,16 @@ namespace forex_experiment.Controllers
             foreach(Strategy _strategy in _strategies)
             {
                 TradingSession session = new TradingSession();
-                session.Name = experiment.Name+"_0";
-                session.StartDate = experiment.StartDate;
-                session.EndDate = experiment.EndDate;
+                session.Name = experiment.name+"_0";
+                session.StartDate = experiment.startdate;
+                session.EndDate = experiment.enddate;
                 session.TradingStrategy = _strategy;
                 session.Read = false;
                 session.StartAmount = 2000.0;
                 await _forexRepository.PushTradingStrategySession(session);
             }
 
-            return Ok(JsonConvert.SerializeObject($"{experiment.Name} added"));
+            return Ok(JsonConvert.SerializeObject($"{experiment.name} added"));
         }
 
         // PUT api/values/5
