@@ -27,6 +27,7 @@ import { IndicatorsEffects } from './store/effects/indicators.effects';
 import { ExperimentEffects } from './store/effects/experiment.effects';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { ManageExperimentsComponent } from './manage-experiments/manage-experiments.component';
+import { ExperimentDetailComponent } from './experiment-detail/experiment-detail.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ManageExperimentsComponent } from './manage-experiments/manage-experime
     AppComponent,
     CreateExperimentComponent,
     AnalysisComponent,
-    ManageExperimentsComponent
+    ManageExperimentsComponent,
+    ExperimentDetailComponent
   ],
   imports: [
     BrowserModule,

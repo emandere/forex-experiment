@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { switchMap } from 'rxjs/operators';
+import {ExperimentDetailComponent} from '../experiment-detail/experiment-detail.component';
 
 @Component({
   selector: 'app-manage-experiments',

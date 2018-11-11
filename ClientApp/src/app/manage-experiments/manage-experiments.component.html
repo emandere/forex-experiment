@@ -1,5 +1,12 @@
 
-  <ul>
+  <!--<ul>
       <li *ngFor="let experiment of experiments$ | async">{{experiment.name}}</li>
-  </ul>
+  </ul>-->
+  <br/>
+  <mat-list>
+    <mat-list-item *ngFor="let experiment of experiments$ | async"> 
+            <br/><app-experiment-detail [experimentvalue]="experiment"></app-experiment-detail> 
+    </mat-list-item>
+    
+   </mat-list>
 
