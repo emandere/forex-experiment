@@ -10,10 +10,10 @@ import { Experiment } from '../models/experiment';
 export class ExperimentsService {
   private indicators:BehaviorSubject<Experiment[]> = new BehaviorSubject([]);
   constructor(private http:HttpClient) {
-   
+    this.updateService();
    }
   getExperiments():Observable<Experiment[]>{
-      this.updateService();
+      //this.updateService();
       return this.indicators.asObservable();
   }
 

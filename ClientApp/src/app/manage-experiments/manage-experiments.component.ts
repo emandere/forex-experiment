@@ -17,7 +17,9 @@ export class ManageExperimentsComponent implements OnInit {
   constructor(private experimentsService:ExperimentsService) { }
 
   ngOnInit() {
-    const timer$ = interval(3000);
+    interval(3000).pipe(
+      map(t=>this.experimentsService.updateService())
+    ).subscribe();
     this.experiments$=this.experimentsService.getExperiments();
     
   }
