@@ -35,5 +35,10 @@ namespace forex_experiment.Repository
             
         }
 
+        public async Task DeleteExperiment(string name)
+        {
+            await _context.Experiments.DeleteOneAsync(item=>item.name==name);
+        }
+
     }    
 }

@@ -4,9 +4,9 @@
   </ul>-->
   <br/>
   <mat-list>
-    <mat-list-item *ngFor="let experiment of experiments$ | async"> 
-            <br/><app-experiment-detail [experimentvalue]="experiment"></app-experiment-detail> 
-    </mat-list-item>
+    <ng-container *ngFor="let experiment of experiments$ | async">
+      <app-experiment-detail [experimentvalue]="experiment"></app-experiment-detail> 
+    </ng-container>
     
    </mat-list>
 

@@ -40,6 +40,13 @@ namespace forex_experiment.Controllers
         }
 
         [HttpPost("[action]")]
+        public async Task<ActionResult> DeleteExperiment([FromBody] string name)
+        {
+            await _forexRepository.DeleteExperiment(name);
+            return Ok(JsonConvert.SerializeObject($"{name} deleted"));
+        }
+
+        [HttpPost("[action]")]
         public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
         {
             await _forexRepository.AddExperiment(experiment);
