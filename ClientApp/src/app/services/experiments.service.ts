@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject} from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Experiment } from '../models/experiment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,25 @@ export class ExperimentsService {
   getExperiments():Observable<Experiment[]>{
       //this.updateService();
       return this.indicators.asObservable();
+  }
+
+  setOptions()
+  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return httpOptions;
+  }
+
+  deleteExperiment(payload:string):Observable<string>
+  {
+    return this.http.post<string>('/api/values/DeleteExperiment',JSON.stringify(payload),this.setOptions())
+                    .pipe(
+                      map((x)=>{return x}
+                    ));
   }
 
   updateService() {
