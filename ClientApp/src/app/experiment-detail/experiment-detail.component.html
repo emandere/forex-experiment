@@ -4,6 +4,30 @@
     <mat-card-title>{{experimentvalue.name}}</mat-card-title>
     <mat-card-subtitle>Experiment</mat-card-subtitle>
   </mat-card-header>
+  <mat-card-content>
+    <table  style="width:280px;margin-left:50px">
+      <tr>
+          <td><div class ="sessioninfo">Start Date</div></td>
+          <td></td>
+          <td><div class ="sessioninfo">Current Date</div></td>
+      </tr>
+      <tr>
+          <td>{{experimentvalue.startdate}}</td>
+          <td></td>
+          <td>{{experimentvalue.enddate}}</td>
+      </tr>
+      <tr>
+        <td><div class ="sessioninfo">Indicator</div></td>
+        <td></td>
+        <td><div class ="sessioninfo">Position</div></td>
+      </tr>
+      <tr>
+          <td>{{experimentvalue.indicator}}</td>
+          <td></td>
+          <td>{{experimentvalue.position}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
   <mat-card-actions>
     <button mat-button>Analyze</button>
     <button mat-button (click)="deleteExperiment()">Delete</button>
