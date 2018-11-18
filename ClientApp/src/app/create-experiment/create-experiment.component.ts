@@ -70,6 +70,7 @@ export class CreateExperimentComponent implements OnInit {
     experiment.stoploss = this.updateVariableT(this.stoploss,parseFloat);
     experiment.takeprofit = this.updateVariableT(this.takeprofit,parseFloat);
     
+  
     this.store.dispatch(new experimentActions.SendNewExperiment(experiment));
     this.store.select(fromState.getExperimentSentResult).subscribe(
       result=>this.snackbar.open("Experiment",result,{ duration: 5000 })
@@ -82,16 +83,19 @@ export class CreateExperimentComponent implements OnInit {
   updateVariableT(parms:string,parseFunc:(n:string)=>any)
   {
     if(parms.includes(","))
-        return {staticOptions:parms.split(',').map(parseFunc),min:0,max:0,increment:0};
+        //return {staticOptions:parms.split(',').map(parseFunc),min:0,max:0,increment:0};
+        return new Variable<number>(parms.split(',').map(parseFunc),0,0,0);
 
     if(parms.includes("|"))
     {
         let args = parms.split('|');
-        return {staticOptions:[],min:parseFunc(args[0]),max:parseFunc(args[1]),increment:parseFunc(args[2])};
+        //return {staticOptions:[],min:parseFunc(args[0]),max:parseFunc(args[1]),increment:parseFunc(args[2])};
+        return new Variable<number>([],parseFunc(args[0]),parseFunc(args[1]),parseFunc(args[2]));
     }
     else
     {
-        return {staticOptions:[parseFunc(parms)],min:0,max:0,increment:0};
+        //return {staticOptions:[parseFunc(parms)],min:0,max:0,increment:0};
+        return new Variable<number>([parseFunc(parms)],0,0,0);
     }
   }
 

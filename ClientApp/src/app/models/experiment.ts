@@ -4,6 +4,20 @@ export class Variable<T>
     min:T;
     max:T;
     increment:T;
+    display:string;
+    constructor(
+        staticOptions: T[],
+        min: T,
+        max: T,
+        increment: T,
+    )
+    {
+        this.staticOptions = staticOptions;
+        this.min = min;
+        this.max = max;
+        this.increment = increment;
+    }
+    
 }
 export class Experiment
 {
@@ -17,6 +31,8 @@ export class Experiment
    units:Variable<number>;
    stoploss:Variable<number>;
    takeprofit:Variable<number>;
+   constructor(){}
+   
    
 }
 
