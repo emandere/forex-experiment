@@ -14,12 +14,16 @@ export class ExperimentDetailComponent implements OnInit {
   experiment:Experiment; 
   unitsDisplay:string; 
   windowDisplay:string;
+  stopLossDisplay:string;
+  takeProfitDisplay:string;
 
   constructor(private experimentsService:ExperimentsService,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
     this.unitsDisplay = this.display(this.experimentvalue.units);
     this.windowDisplay = this.display(this.experimentvalue.window);
+    this.stopLossDisplay = this.display(this.experimentvalue.stoploss);
+    this.takeProfitDisplay = this.display(this.experimentvalue.takeprofit);
   }
 
   display(myvar:Variable<number>)
