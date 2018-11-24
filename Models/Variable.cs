@@ -45,22 +45,22 @@ namespace forex_experiment.Models
 
             switch(name)
             {
-            case "Window":
+            case "window":
                 newStrategy.Window=currentValue;
                 break;
-            case "StopLoss":
+            case "stoploss":
                 newStrategy.StopLoss=currentValue;
                 break;
-            case "TakeProfit" :
+            case "takeprofit" :
                 newStrategy.TakeProfit=currentValue;
                 break;
-            case "Units":
+            case "units":
                 newStrategy.Units=currentValue;
                 break;
-            case "RuleName":
+            case "rulename":
                 newStrategy.RuleName = currentValue;
                 break;
-            case "Position":
+            case "position":
                 newStrategy.Position = currentValue;
                 break;
             }

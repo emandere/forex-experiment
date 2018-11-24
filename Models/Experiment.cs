@@ -33,22 +33,22 @@ namespace forex_experiment.Models
             window.name="window";
             stoploss.name ="stoploss";
             takeprofit.name ="takeprofit";
-            units.name ="Units";
+            units.name ="units";
             
             Variable<string> position = new Variable<string>();
             position.name="position";
             position.staticOptions= new string[]{ this.position};
 
-            Variable<string> RuleName = new Variable<string>();
-            RuleName.name="rulename";
-            RuleName.staticOptions= new string[]{indicator};
+            Variable<string> rulename = new Variable<string>();
+            rulename.name="rulename";
+            rulename.staticOptions= new string[]{indicator};
 
             variables.Add(window);
             variables.Add(stoploss);
             variables.Add(takeprofit);
             variables.Add(units);
             variables.Add(position);
-            variables.Add(RuleName);
+            variables.Add(rulename);
             
 
             return GetStrategyHelper(variables);

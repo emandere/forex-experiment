@@ -26,13 +26,13 @@ export class CreateExperimentComponent implements OnInit {
   experimentSentResult$: Observable<string>; 
   name:string='NewExperiment';
   indicator:string='';
-  startdate:string='20160101';
-  enddate:string='20170101';
+  startdate:string='20170601';
+  enddate:string='20171101';
   window:string='14';
   units:string='2000';
   startamount:string='2000';
-  stoploss:string='1.0';
-  takeprofit:string='1.0';
+  stoploss:string='1.007';
+  takeprofit:string='0.993';
   position:string='';
   positions:StrategyPosition[]=[
     {value: 'long', viewValue: 'long'},

@@ -51,16 +51,19 @@ namespace forex_experiment.Controllers
         {
             await _forexRepository.AddExperiment(experiment);
             List<Strategy> _strategies = experiment.GetStrategies();
+            int counter = 0;
             foreach(Strategy _strategy in _strategies)
             {
                 TradingSession session = new TradingSession();
-                session.Name = experiment.name+"_0";
+                session.Name = $"{experiment.name}_{counter}";
                 session.StartDate = experiment.startdate;
                 session.EndDate = experiment.enddate;
                 session.TradingStrategy = _strategy;
                 session.Read = false;
+                session.ExperimentId = experiment.name;
                 session.StartAmount = 2000.0;
                 await _forexRepository.PushTradingStrategySession(session);
+                counter++;
             }
 
             return Ok(JsonConvert.SerializeObject($"{experiment.name} added"));

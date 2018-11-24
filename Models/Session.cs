@@ -16,6 +16,8 @@ namespace forex_experiment.Models
         public double StartAmount{get;set;}
         [BsonElement("read")]
         public bool Read{get;set;}
+        [BsonElement("experimentId")]
+        public string ExperimentId{get;set;}
 
 
     }
