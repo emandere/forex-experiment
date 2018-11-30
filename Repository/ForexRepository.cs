@@ -40,5 +40,17 @@ namespace forex_experiment.Repository
             await _context.Experiments.DeleteOneAsync(item=>item.name==name);
         }
 
+        public async Task<IEnumerable<ForexSession>> GetForexSessions(string experimentId)
+        {
+            var result = await _context.ForexSessions.Find((s)=>s.ExperimentId==experimentId).ToListAsync();
+            return result;
+        }
+
+         public async Task<IEnumerable<ForexSession>> GetForexSessions()
+        {
+            var result = await _context.ForexSessions.Find(_=>true).ToListAsync();
+            return result;
+        }
+
     }    
 }
