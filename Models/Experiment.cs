@@ -26,6 +26,8 @@ namespace forex_experiment.Models
         public Variable<double> stoploss{get;set;}
         [BsonElement("takeprofit")]
         public Variable<double> takeprofit{get;set;}
+        public string percentcomplete{get;set;}
+        public bool complete{get;set;}
 
         public List<Strategy> GetStrategies()
         {

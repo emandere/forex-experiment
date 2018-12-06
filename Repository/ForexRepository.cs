@@ -17,8 +17,24 @@ namespace forex_experiment.Repository
 
         public async Task<IEnumerable<ForexExperiment>> GetAllExperiments()
         {
-            var documents = await _context.Experiments.Find(_ => true).ToListAsync();
-            return documents;
+            var experiments = await _context.Experiments.Find(_ => true).ToListAsync();
+            foreach(ForexExperiment experiment in experiments)
+            {
+                var sessions = await GetForexSessions(experiment.name);
+                var sessionsCount = sessions.Count;
+                var sessionsCompleteCount = sessions.FindAll((x)=>double.Parse(x.PercentComplete) >= 100).Count;
+                var totalCount = experiment.GetStrategies().Count;
+                double percentcomplete = ((double) sessionsCompleteCount / (double) totalCount)*100;
+                experiment.percentcomplete = percentcomplete.ToString();
+                if(percentcomplete>=100.0)
+                    experiment.complete =true;
+                else
+                    experiment.complete=false;
+                
+
+            }
+
+            return experiments;
         }
 
         public async Task AddExperiment(ForexExperiment item)
@@ -40,13 +56,13 @@ namespace forex_experiment.Repository
             await _context.Experiments.DeleteOneAsync(item=>item.name==name);
         }
 
-        public async Task<IEnumerable<ForexSession>> GetForexSessions(string experimentId)
+        public async Task<List<ForexSession>> GetForexSessions(string experimentId)
         {
             var result = await _context.ForexSessions.Find((s)=>s.ExperimentId==experimentId).ToListAsync();
             return result;
         }
 
-         public async Task<IEnumerable<ForexSession>> GetForexSessions()
+         public async Task<List<ForexSession>> GetForexSessions()
         {
             var result = await _context.ForexSessions.Find(_=>true).ToListAsync();
             return result;

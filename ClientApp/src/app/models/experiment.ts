@@ -26,11 +26,14 @@ export class Experiment
    startdate:string;
    enddate:string;
    position:string;
+   percentcomplete:string;
+   complete:boolean;
    startamount:number;
    window:Variable<number>;
    units:Variable<number>;
    stoploss:Variable<number>;
    takeprofit:Variable<number>;
+   
    constructor(){}
    
    

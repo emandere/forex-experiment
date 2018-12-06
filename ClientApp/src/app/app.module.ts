@@ -12,6 +12,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
@@ -59,6 +60,7 @@ import { ExperimentDetailComponent } from './experiment-detail/experiment-detail
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects]),
