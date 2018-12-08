@@ -14,11 +14,11 @@ namespace forex_experiment.Repository
                 _database = client.GetDatabase(settings.Value.Database);
         }
 
-        public IMongoCollection<ForexExperiment> Experiments
+        public IMongoCollection<ForexExperimentMongo> Experiments
         {
             get
             {
-                return _database.GetCollection<ForexExperiment>("experiments");
+                return _database.GetCollection<ForexExperimentMongo>("experiments");
             }
         }
 

@@ -2,32 +2,42 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.Linq;
-namespace forex_experiment.Models
+using forex_experiment.Models;
+namespace forex_experiment.Domain
 {
-   
+    
     public class ForexExperiment
     {
-        public ObjectId Id { get; set; }
-        [BsonElement("name")]
+        private  List<SessionAnalysis> _sessions;
+        public ForexExperiment()
+        {
+            _sessions = new List<SessionAnalysis>();
+        }
+        
         public string name { get; set; }
-        [BsonElement("indicator")]
         public string indicator{get;set;}
-        [BsonElement("startdate")]
+        
         public string startdate{get;set;}
-        [BsonElement("enddate")]
+        
         public string enddate{get;set;}
-        [BsonElement("position")]
+        
         public string position{get;set;}
-        [BsonElement("window")]
+        
         public Variable<int> window{get;set;}
-        [BsonElement("units")]
+       
         public Variable<int> units{get;set;}
-        [BsonElement("stoploss")]
+       
         public Variable<double> stoploss{get;set;}
-        [BsonElement("takeprofit")]
         public Variable<double> takeprofit{get;set;}
         public string percentcomplete{get;set;}
         public bool complete{get;set;}
+        /* public List<SessionAnalysis> sessions
+        {
+            get
+            {
+                return _sessions;
+            }
+        }*/
 
         public List<Strategy> GetStrategies()
         {

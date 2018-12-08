@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using forex_experiment.Models;
 using forex_experiment.Repository;
+using forex_experiment.Mapper;
+using forex_experiment.Domain;
 
 namespace forex_experiment.Controllers
 {
@@ -15,9 +17,12 @@ namespace forex_experiment.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly IForexRepository _forexRepository;
-        public ValuesController(IForexRepository forexRepository)
+        private readonly ForexExperimentMap _forexExperimentMap;
+       
+        public ValuesController(IForexRepository forexRepository,ForexExperimentMap forexExperimentMap)
         {
             _forexRepository=forexRepository;
+            _forexExperimentMap = forexExperimentMap;
         }
         // GET api/values
         [HttpGet("[action]")]
@@ -29,7 +34,7 @@ namespace forex_experiment.Controllers
         [HttpGet("[action]")]
         public async Task<ActionResult<IEnumerable<ForexExperiment>>> GetExperiments()
         {
-            return Ok(await _forexRepository.GetAllExperiments());
+            return Ok(await _forexExperimentMap.GetExperiments());
         }
 
         // POST api/values
@@ -47,7 +52,7 @@ namespace forex_experiment.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
+        public async Task<ActionResult> CreateExperiment([FromBody] ForexExperimentMongo experiment)
         {
             await _forexRepository.AddExperiment(experiment);
             List<Strategy> _strategies = experiment.GetStrategies();

@@ -19,6 +19,10 @@ export class Variable<T>
     }
     
 }
+export class SessionAnalysis
+{
+    PL:number;
+}
 export class Experiment
 {
    indicator:string;

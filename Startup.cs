@@ -11,9 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using AutoMapper;
 
 using forex_experiment.Models;
 using forex_experiment.Repository;
+using forex_experiment.Mapper;
 
 namespace forex_experiment
 {
@@ -63,6 +65,8 @@ namespace forex_experiment
             });
             
             services.AddTransient<IForexRepository,ForexRepository>();
+            services.AddTransient<ForexExperimentMap,ForexExperimentMap>();
+            services.AddAutoMapper();
         }
 
 
