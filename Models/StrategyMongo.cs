@@ -1,7 +1,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 namespace forex_experiment.Models
 {
-   public class Strategy
+   public class StrategyMongo
    {
        [BsonElement("window")]
         public int Window{get;set;}

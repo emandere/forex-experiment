@@ -5,7 +5,7 @@ namespace forex_experiment.Models
     public class TradingSession
     {
         [BsonElement("strategy")]
-        public Strategy TradingStrategy{get;set;}
+        public StrategyMongo TradingStrategy{get;set;}
         [BsonElement("name")]
         public string Name{get;set;}
         [BsonElement("startdate")]

@@ -19,43 +19,7 @@ namespace forex_experiment.Repository
         public async Task<IEnumerable<ForexExperimentMongo>> GetAllExperiments()
         {
             var experiments = await _context.Experiments.Find(_ => true).ToListAsync();
-            foreach(ForexExperimentMongo experiment in experiments)
-            {
-                var sessions = await GetForexSessions(experiment.name);
-                var sessionsCount = sessions.Count;
-                var sessionsCompleteCount = sessions.FindAll((x)=>double.Parse(x.PercentComplete) >= 100).Count;
-                var totalCount = experiment.GetStrategies().Count;
-                double percentcomplete = ((double) sessionsCompleteCount / (double) totalCount)*100;
-                experiment.percentcomplete = percentcomplete.ToString();
-                if(percentcomplete>=100.0)
-                    experiment.complete =true;
-                else
-                    experiment.complete=false;
-                
-                foreach(ForexSession session in sessions)
-                {
-                    double firstBalance = session
-                                            .SessionUser
-                                            .Accounts
-                                            .Primary
-                                            .BalanceHistory
-                                            .First().Amount;
-
-                   double lastBalance = session
-                                            .SessionUser
-                                            .Accounts
-                                            .Primary
-                                            .BalanceHistory
-                                            .First().Amount;
-
-                   // experiment.sessions.Add(new Domain.SessionAnalysis
-                   //                     {PL=lastBalance - firstBalance});
-
-
-                }
-                
-
-            }
+        
 
             return experiments;
         }

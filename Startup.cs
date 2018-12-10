@@ -16,6 +16,7 @@ using AutoMapper;
 using forex_experiment.Models;
 using forex_experiment.Repository;
 using forex_experiment.Mapper;
+using forex_experiment.Domain;
 
 namespace forex_experiment
 {
@@ -63,9 +64,20 @@ namespace forex_experiment
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ForexExperiment, ForexExperimentMongo>()
+                .ForMember(x => x.Id, opt => opt.Ignore());
+
+                 cfg.CreateMap<ForexExperimentMongo, ForexExperiment>()
+                .ForMember(x => x.sessions, opt => opt.Ignore());
+            });
+            IMapper mapper = config.CreateMapper();
             
             services.AddTransient<IForexRepository,ForexRepository>();
             services.AddTransient<ForexExperimentMap,ForexExperimentMap>();
+            services.AddSingleton(mapper);
             services.AddAutoMapper();
         }
 

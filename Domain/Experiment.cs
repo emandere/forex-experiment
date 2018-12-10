@@ -31,13 +31,13 @@ namespace forex_experiment.Domain
         public Variable<double> takeprofit{get;set;}
         public string percentcomplete{get;set;}
         public bool complete{get;set;}
-        /* public List<SessionAnalysis> sessions
+        public List<SessionAnalysis> sessions
         {
             get
             {
                 return _sessions;
             }
-        }*/
+        }
 
         public List<Strategy> GetStrategies()
         {

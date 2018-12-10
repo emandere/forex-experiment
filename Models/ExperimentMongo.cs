@@ -20,54 +20,15 @@ namespace forex_experiment.Models
         [BsonElement("position")]
         public string position{get;set;}
         [BsonElement("window")]
-        public Variable<int> window{get;set;}
+        public VariableMongo<int> window{get;set;}
         [BsonElement("units")]
-        public Variable<int> units{get;set;}
+        public VariableMongo<int> units{get;set;}
         [BsonElement("stoploss")]
-        public Variable<double> stoploss{get;set;}
+        public VariableMongo<double> stoploss{get;set;}
         [BsonElement("takeprofit")]
-        public Variable<double> takeprofit{get;set;}
+        public VariableMongo<double> takeprofit{get;set;}
         public string percentcomplete{get;set;}
         public bool complete{get;set;}
-
-        public List<Strategy> GetStrategies()
-        {
-            List<Variable> variables = new List<Variable>();
-            window.name="window";
-            stoploss.name ="stoploss";
-            takeprofit.name ="takeprofit";
-            units.name ="units";
-            
-            Variable<string> position = new Variable<string>();
-            position.name="position";
-            position.staticOptions= new string[]{ this.position};
-
-            Variable<string> rulename = new Variable<string>();
-            rulename.name="rulename";
-            rulename.staticOptions= new string[]{indicator};
-
-            variables.Add(window);
-            variables.Add(stoploss);
-            variables.Add(takeprofit);
-            variables.Add(units);
-            variables.Add(position);
-            variables.Add(rulename);
-            
-
-            return GetStrategyHelper(variables);
-        }
-
-        public List<Strategy> GetStrategyHelper(List<Variable> variables)
-        {
-            if(variables.Count==1)
-            {
-                return variables[0].CartesianProduct(new List<Strategy>());
-            }
-            else
-            {
-                return variables[0].CartesianProduct(GetStrategyHelper(variables.Skip(1).ToList()));
-            }
-        }
 
     }
 }

@@ -16,12 +16,12 @@ namespace forex_experiment.Controllers
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        private readonly IForexRepository _forexRepository;
+        
         private readonly ForexExperimentMap _forexExperimentMap;
        
         public ValuesController(IForexRepository forexRepository,ForexExperimentMap forexExperimentMap)
         {
-            _forexRepository=forexRepository;
+            
             _forexExperimentMap = forexExperimentMap;
         }
         // GET api/values
@@ -47,31 +47,15 @@ namespace forex_experiment.Controllers
         [HttpPost("[action]")]
         public async Task<ActionResult> DeleteExperiment([FromBody] string name)
         {
-            await _forexRepository.DeleteExperiment(name);
+            await _forexExperimentMap.DeleteExperiment(name);
             return Ok(JsonConvert.SerializeObject($"{name} deleted"));
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult> CreateExperiment([FromBody] ForexExperimentMongo experiment)
+        public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
         {
-            await _forexRepository.AddExperiment(experiment);
-            List<Strategy> _strategies = experiment.GetStrategies();
-            int counter = 0;
-            foreach(Strategy _strategy in _strategies)
-            {
-                TradingSession session = new TradingSession();
-                session.Name = $"{experiment.name}_{counter}";
-                session.StartDate = experiment.startdate;
-                session.EndDate = experiment.enddate;
-                session.TradingStrategy = _strategy;
-                session.Read = false;
-                session.ExperimentId = experiment.name;
-                session.StartAmount = 2000.0;
-                await _forexRepository.PushTradingStrategySession(session);
-                counter++;
-            }
-
-            return Ok(JsonConvert.SerializeObject($"{experiment.name} added"));
+            var result = await _forexExperimentMap.CreateExperiment(experiment);
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
         // PUT api/values/5

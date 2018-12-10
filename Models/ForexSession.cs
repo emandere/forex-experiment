@@ -38,7 +38,7 @@ namespace forex_experiment.Models
         public string CurrentTime { get; set; }
 
         [BsonElement("strategy")]
-        public Strategy Strategy { get; set; }
+        public StrategyMongo Strategy { get; set; }
 
         [BsonElement("sessionUser")]
         public SessionUser SessionUser { get; set; }
