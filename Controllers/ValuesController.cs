@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using forex_experiment.Models;
-using forex_experiment.Repository;
 using forex_experiment.Mapper;
 using forex_experiment.Domain;
 
@@ -19,9 +17,8 @@ namespace forex_experiment.Controllers
         
         private readonly ForexExperimentMap _forexExperimentMap;
        
-        public ValuesController(IForexRepository forexRepository,ForexExperimentMap forexExperimentMap)
-        {
-            
+        public ValuesController(ForexExperimentMap forexExperimentMap)
+        {   
             _forexExperimentMap = forexExperimentMap;
         }
         // GET api/values
