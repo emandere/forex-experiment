@@ -3,13 +3,15 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY *.csproj ./
 RUN dotnet restore
-RUN dotnet build
-RUN dotnet publish -c Release -o out
 
 # Copy everything else and buildb
 COPY . ./
 
 RUN cd /app/ClientApp/ && npm run build -- --output-path=/app/ClientApp/dist --configuration production
+
+
+RUN dotnet build
+RUN dotnet publish -c Release -o out
 
 
 

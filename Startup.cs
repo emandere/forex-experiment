@@ -109,12 +109,12 @@ namespace forex_experiment
             
             app.UseSpa(spa =>
             {
-            spa.Options.SourcePath = "ClientApp";
-            
-            if (env.IsDevelopment())
-            {
-                spa.UseAngularCliServer(npmScript: "start");
-            }
+                spa.Options.SourcePath = "ClientApp";
+                
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
 
         }
