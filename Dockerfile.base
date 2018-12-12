@@ -1,12 +1,7 @@
 FROM microsoft/dotnet:sdk AS build-env
 WORKDIR /app
 
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and buildb
+# Copy everything else and build
 COPY . ./
 
 RUN apt-get update -yq && apt-get upgrade -yq && apt-get install -yq curl git nano

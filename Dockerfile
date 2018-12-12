@@ -4,7 +4,7 @@ WORKDIR /app
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy everything else and buildb
+# Copy everything else and build
 COPY . ./
 
 RUN cd /app/ClientApp/ && npm run build -- --output-path=/app/ClientApp/dist --configuration production
