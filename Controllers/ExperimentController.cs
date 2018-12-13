@@ -22,9 +22,13 @@ namespace forex_experiment.Controllers
         }
         
         [HttpGet("[action]")]
-        public async Task<ActionResult<IEnumerable<ForexExperiment>>> GetExperiments()
+        public async Task<ActionResult> GetExperiments()
         {
-            return Ok(await _forexExperimentMap.GetExperiments());
+            var experimentsVar = new 
+            { 
+                experiments=await _forexExperimentMap.GetExperiments()
+            };
+            return Ok(JsonConvert.SerializeObject(experimentsVar));
         }
 
         [HttpDelete("[action]")]

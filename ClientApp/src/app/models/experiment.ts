@@ -43,7 +43,14 @@ export class Experiment
    
 }
 
+export class ExperimentsResult {
+    experiments:Experiment[];
+}
+
 export interface StrategyPosition {
     value: string;
     viewValue: string;
-  }
+}
+
+
+

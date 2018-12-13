@@ -46,6 +46,7 @@ namespace forex_experiment.Mapper
                     experiment.complete =true;
                 else
                     experiment.complete=false;
+                    
                 
                 foreach(ForexSession session in sessions)
                 {
@@ -61,7 +62,7 @@ namespace forex_experiment.Mapper
                                             .Accounts
                                             .Primary
                                             .BalanceHistory
-                                            .First().Amount;
+                                            .Last().Amount;
 
                    experiment.sessions.Add(new Domain.SessionAnalysis
                                         {PL=lastBalance - firstBalance});

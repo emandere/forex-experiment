@@ -33,9 +33,15 @@ namespace forex_experiment.Domain
         public bool complete{get;set;}
         public List<SessionAnalysis> sessions
         {
+           
             get
             {
                 return _sessions;
+            }
+
+            private set
+            {
+
             }
         }
 

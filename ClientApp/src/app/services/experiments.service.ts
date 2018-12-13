@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject} from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Experiment } from '../models/experiment';
+import { Experiment, ExperimentsResult } from '../models/experiment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -38,8 +38,8 @@ export class ExperimentsService {
   }
 
   updateService() {
-    this.http.get<Experiment[]>('/api/experiment/GetExperiments').subscribe(result => {
-      this.indicators.next(result);
+    this.http.get<ExperimentsResult>('/api/experiment/GetExperiments').subscribe(result => {
+      this.indicators.next(result.experiments);
     }, error => console.error(error));
   }
 }
