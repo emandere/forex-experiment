@@ -29,7 +29,7 @@ export class ExperimentEffects {
     ofType(SubmitexperimentActionTypes.SendNewExperiment),
     map((action: SendNewExperiment) => action.payload),
     switchMap(payload => {
-      return this.http.post<string>('api/values/CreateExperiment',JSON.stringify(payload),this.setOptions())
+      return this.http.post<string>('api/experiment/CreateExperiment',JSON.stringify(payload),this.setOptions())
         .pipe(
           map((response) => {
             return new SendNewExperimentResponse(JSON.stringify(response));

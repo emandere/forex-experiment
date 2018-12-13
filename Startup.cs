@@ -17,6 +17,7 @@ using forex_experiment.Models;
 using forex_experiment.Repository;
 using forex_experiment.Mapper;
 using forex_experiment.Domain;
+using forex_experiment.Config;
 
 namespace forex_experiment
 {
@@ -67,11 +68,7 @@ namespace forex_experiment
 
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ForexExperiment, ForexExperimentMongo>()
-                .ForMember(x => x.Id, opt => opt.Ignore());
-
-                 cfg.CreateMap<ForexExperimentMongo, ForexExperiment>()
-                .ForMember(x => x.sessions, opt => opt.Ignore());
+                cfg.AddProfile(new ForexExperimentProfile());
             });
             IMapper mapper = config.CreateMapper();
             

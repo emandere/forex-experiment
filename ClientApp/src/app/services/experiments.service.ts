@@ -31,14 +31,14 @@ export class ExperimentsService {
 
   deleteExperiment(payload:string):Observable<string>
   {
-    return this.http.post<string>('/api/values/DeleteExperiment',JSON.stringify(payload),this.setOptions())
+    return this.http.delete<string>(`/api/experiment/DeleteExperiment?name=${payload}`)
                     .pipe(
                       map((x)=>{return x}
                     ));
   }
 
   updateService() {
-    this.http.get<Experiment[]>('/api/values/GetExperiments').subscribe(result => {
+    this.http.get<Experiment[]>('/api/experiment/GetExperiments').subscribe(result => {
       this.indicators.next(result);
     }, error => console.error(error));
   }

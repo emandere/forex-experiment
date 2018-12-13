@@ -14,10 +14,31 @@ namespace forex_experiment.Controllers
     [Route("api/[controller]")]
     public class ExperimentController : ControllerBase
     {
+        private readonly ForexExperimentMap _forexExperimentMap;
+       
+        public ExperimentController(ForexExperimentMap forexExperimentMap)
+        {   
+            _forexExperimentMap = forexExperimentMap;
+        }
+        
         [HttpGet("[action]")]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<ForexExperiment>>> GetExperiments()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _forexExperimentMap.GetExperiments());
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<ActionResult> DeleteExperiment(string name)
+        {
+            await _forexExperimentMap.DeleteExperiment(name);
+            return Ok(JsonConvert.SerializeObject($"{name} deleted"));
+        }
+
+        [HttpPost("[action]")]
+        public async Task<ActionResult> CreateExperiment([FromBody] ForexExperiment experiment)
+        {
+            var result = await _forexExperimentMap.CreateExperiment(experiment);
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
     }
