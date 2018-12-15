@@ -50,7 +50,7 @@
     <mat-progress-bar *ngIf="!experimentvalue.complete" mode="determinate" value={{experimentvalue.percentcomplete}}></mat-progress-bar>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>Analyze</button>
+    <button mat-button routerLink="/analysis" routerLinkActive="active" (click)="analyzeExperiment()">Analyze</button>
     <button mat-button (click)="deleteExperiment()">Delete</button>
   </mat-card-actions>
 </mat-card>

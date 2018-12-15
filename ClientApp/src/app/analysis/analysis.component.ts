@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Experiment } from '../models/experiment';
+import * as fromState from '../store/reducers';
 
 @Component({
   selector: 'app-analysis',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analysis.component.css']
 })
 export class AnalysisComponent implements OnInit {
+  experiment:Experiment;
 
-  constructor() { }
+  constructor(private store: Store<fromState.State>) 
+  {
+
+  }
 
   ngOnInit() {
+    this.store.select(fromState.getExperimentAnalysis).subscribe(
+      result=>this.experiment=result
+    );
   }
 
 }

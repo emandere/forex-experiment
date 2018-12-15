@@ -1,8 +1,12 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Experiment } from '../models/experiment';
 import {ExperimentsService} from '../services/experiments.service';
 import {MatSnackBar} from '@angular/material';
-import {Variable} from '../models/experiment'
+import {Variable} from '../models/experiment';
+import * as fromState from '../store/reducers';
+
+import * as experimentAnalysisActions from '../store/actions/experimentAnalysis.actions';
 
 @Component({
   selector: 'app-experiment-detail',
@@ -17,7 +21,8 @@ export class ExperimentDetailComponent implements OnInit {
   stopLossDisplay:string;
   takeProfitDisplay:string;
 
-  constructor(private experimentsService:ExperimentsService,private snackbar:MatSnackBar) { }
+  constructor( private store:Store<fromState.State>,
+    private experimentsService:ExperimentsService,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
     this.unitsDisplay = this.display(this.experimentvalue.units);
@@ -46,6 +51,11 @@ export class ExperimentDetailComponent implements OnInit {
         result=>this.snackbar.open("Experiment",result,{ duration: 1000 })
       );
       this.experimentsService.updateService();
+  }
+
+  analyzeExperiment()
+  {
+    this.store.dispatch(new experimentAnalysisActions.SetExperimentAnalysis(this.experimentvalue));
   }
 
 

@@ -1,3 +1,11 @@
+export class Strategy
+{
+    window:Variable<number>;
+    units:Variable<number>;
+    stoploss:Variable<number>;
+    takeprofit:Variable<number>; 
+    position:string;  
+}
 export class Variable<T>
 {
     staticOptions:T[];
@@ -22,6 +30,7 @@ export class Variable<T>
 export class SessionAnalysis
 {
     PL:number;
+    SessionStrategy:Strategy;
 }
 export class Experiment
 {
@@ -37,7 +46,7 @@ export class Experiment
    units:Variable<number>;
    stoploss:Variable<number>;
    takeprofit:Variable<number>;
-   
+   sessions:SessionAnalysis[];
    constructor(){}
    
    

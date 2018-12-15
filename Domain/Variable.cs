@@ -34,32 +34,32 @@ namespace forex_experiment.Domain
         {
             Strategy newStrategy = new Strategy();
 
-            newStrategy.Window=oldStrategy.Window;
-            newStrategy.StopLoss = oldStrategy.StopLoss;
-            newStrategy.TakeProfit = oldStrategy.TakeProfit;
-            newStrategy.Position =oldStrategy.Position;
-            newStrategy.RuleName =oldStrategy.RuleName;
-            newStrategy.Units = oldStrategy.Units;
+            newStrategy.window=oldStrategy.window;
+            newStrategy.stopLoss = oldStrategy.stopLoss;
+            newStrategy.takeProfit = oldStrategy.takeProfit;
+            newStrategy.position =oldStrategy.position;
+            newStrategy.ruleName =oldStrategy.ruleName;
+            newStrategy.units = oldStrategy.units;
 
             switch(name)
             {
             case "window":
-                newStrategy.Window=currentValue;
+                newStrategy.window=currentValue;
                 break;
             case "stoploss":
-                newStrategy.StopLoss=currentValue;
+                newStrategy.stopLoss=currentValue;
                 break;
             case "takeprofit" :
-                newStrategy.TakeProfit=currentValue;
+                newStrategy.takeProfit=currentValue;
                 break;
             case "units":
-                newStrategy.Units=currentValue;
+                newStrategy.units=currentValue;
                 break;
             case "rulename":
-                newStrategy.RuleName = currentValue;
+                newStrategy.ruleName = currentValue;
                 break;
             case "position":
-                newStrategy.Position = currentValue;
+                newStrategy.position = currentValue;
                 break;
             }
             return newStrategy;

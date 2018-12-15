@@ -4,17 +4,17 @@ namespace forex_experiment.Models
    public class StrategyMongo
    {
        [BsonElement("window")]
-        public int Window{get;set;}
+        public int window{get;set;}
         [BsonElement("ruleName")]
-        public string RuleName{get;set;}
+        public string ruleName{get;set;}
         [BsonElement("position")]
-        public string Position{get;set;}
+        public string position{get;set;}
         [BsonElement("units")]
-        public int Units{get;set;}
+        public int units{get;set;}
         [BsonElement("stopLoss")]
-        public double StopLoss{get;set;}
+        public double stopLoss{get;set;}
         [BsonElement("takeProfit")]
-        public double TakeProfit{get;set;}
+        public double takeProfit{get;set;}
 
    } 
 }

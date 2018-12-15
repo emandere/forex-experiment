@@ -2,12 +2,12 @@ namespace forex_experiment.Domain
 {
    public class Strategy
    {
-        public int Window{get;set;}
-        public string RuleName{get;set;}
-        public string Position{get;set;}
-        public int Units{get;set;}
-        public double StopLoss{get;set;}
-        public double TakeProfit{get;set;}
+        public int window{get;set;}
+        public string ruleName{get;set;}
+        public string position{get;set;}
+        public int units{get;set;}
+        public double stopLoss{get;set;}
+        public double takeProfit{get;set;}
 
    } 
 }
