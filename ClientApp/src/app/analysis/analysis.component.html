@@ -1,3 +1,17 @@
 <ng-container >
   <app-experiment-detail *ngIf='experiment!==undefined' [experimentvalue]="experiment"></app-experiment-detail> 
 </ng-container>
+<mat-card *ngIf='experiment!==undefined' class="experiment-card">
+    <mat-card-header>
+        <mat-card-title>Experiment Results</mat-card-title>
+      </mat-card-header>
+      <mat-card-content align="left">
+<google-chart
+  [title]="title"
+  [type]="type"
+  [data]="data"
+  [options] = "options"
+   >
+</google-chart>
+      </mat-card-content>
+</mat-card>

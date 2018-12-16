@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { GoogleChartsModule } from 'angular-google-charts';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -62,6 +62,7 @@ import { ExperimentDetailComponent } from './experiment-detail/experiment-detail
     MatSnackBarModule,
     MatProgressBarModule,
     FormsModule,
+    GoogleChartsModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []

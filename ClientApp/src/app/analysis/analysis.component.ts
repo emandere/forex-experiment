@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Experiment } from '../models/experiment';
 import * as fromState from '../store/reducers';
+import { GoogleChartComponent } from 'angular-google-charts';
 
 @Component({
   selector: 'app-analysis',
@@ -9,7 +10,25 @@ import * as fromState from '../store/reducers';
   styleUrls: ['./analysis.component.css']
 })
 export class AnalysisComponent implements OnInit {
+  
   experiment:Experiment;
+  title:string = "PL vs Stop Loss";
+  type:string ="LineChart";
+  data:Array<Array<any>>;
+  columnNames = ['Stop Loss','Profit'];
+  options = {
+    hAxis:
+    {
+      title:"Stop Loss"
+    },
+    vAxis:
+    {
+      title:"Profit"
+    },
+    series: {
+      1: {curveType: 'function'}
+    }
+  };
 
   constructor(private store: Store<fromState.State>) 
   {
@@ -17,9 +36,17 @@ export class AnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.store.select(fromState.getExperimentAnalysis).subscribe(
-      result=>this.experiment=result
+      result=>this.setupAnalysis(result)
     );
+    
+  }
+
+  setupAnalysis(result:Experiment)
+  {
+    this.experiment = result;
+    this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.stopLoss,sess.PL]);
   }
 
 }

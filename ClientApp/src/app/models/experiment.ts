@@ -2,8 +2,8 @@ export class Strategy
 {
     window:Variable<number>;
     units:Variable<number>;
-    stoploss:Variable<number>;
-    takeprofit:Variable<number>; 
+    stopLoss:Variable<number>;
+    takeProfit:Variable<number>; 
     position:string;  
 }
 export class Variable<T>
