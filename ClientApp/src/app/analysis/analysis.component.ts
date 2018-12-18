@@ -46,7 +46,34 @@ export class AnalysisComponent implements OnInit {
   setupAnalysis(result:Experiment)
   {
     this.experiment = result;
-    this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.stopLoss,sess.PL]);
+    let xvar:string = "Stop Loss";
+    if(this.experiment.stoploss.staticOptions.length==0)
+    {
+      this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.stopLoss,sess.PL]);
+
+    }
+    else
+    {
+      xvar ="Take Profit";
+      this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.takeProfit,sess.PL]); 
+    }
+    this.title = "PL vs "+xvar;
+    this.columnNames = [xvar,'Profit'];
+    this.options = {
+    hAxis:
+    {
+      title:xvar
+    },
+    vAxis:
+    {
+      title:"Profit"
+    },
+    series: {
+      1: {curveType: 'function'}
+    }
+  };
+
+
   }
 
 }
