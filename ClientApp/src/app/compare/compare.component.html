@@ -1,14 +1,17 @@
 <br/>
-<mat-card *ngIf='(experiments$ | async)?.length>0' class="experiment-card">
+<mat-card *ngIf='(experiments$ | async)?.length>0' class="experiment-chart-card">
     <mat-card-header>
         <mat-card-title>Experiment Results</mat-card-title>
       </mat-card-header>
-      <mat-card-content align="left">
+      <mat-card-content>
   <google-chart
     [title]="title"
     [type]="type"
     [data]="data"
     [options] = "options"
+    [columnNames] = "columnNames"
+    [width] = "800"
+    [height] = "400"
     >
   </google-chart>
 </mat-card-content>

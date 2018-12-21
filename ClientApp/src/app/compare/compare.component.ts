@@ -28,6 +28,9 @@ export class CompareComponent implements OnInit {
     },
     series: {
       1: {curveType: 'function'}
+    },
+    legend:{
+      position:"bottom"
     }
   };
 
@@ -58,8 +61,7 @@ export class CompareComponent implements OnInit {
       let sessionPL = experiments.map(experiment=>experiment.sessions.map(session=>session.PL)); 
       let a = _.zip.apply(_,sessionPL);
       this.data = _.zip(sessionsStopLoss,a).map(row=>_.flatMapDeep(row));
-      let headers =  experiments.map(experiment=>experiment.name);
-      headers.unshift(xvar);
+      
       
 
 
@@ -69,9 +71,12 @@ export class CompareComponent implements OnInit {
       xvar ="Take Profit";
       //this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.takeProfit,sess.PL]); 
     }
+    let headers =  experiments.map(experiment=>experiment.name);
+    headers.unshift(xvar);
     this.title = "PL vs "+xvar;
-    this.columnNames = [xvar,'Profit'];
+    this.columnNames = headers;
     this.options = {
+     
     hAxis:
     {
       title:xvar
@@ -82,7 +87,13 @@ export class CompareComponent implements OnInit {
     },
     series: {
       1: {curveType: 'function'}
+    
+    },
+    legend:{
+      position:"bottom"
     }
+
+    
   };
 
 
