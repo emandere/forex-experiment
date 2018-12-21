@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 
  
 import * as fromState from '../store/reducers';
-import * as experimentActions from '../store/actions/submitexperiment.actions';
+import * as experimentActions from '../store/actions/experiment.actions';
 import * as indicatorActions from '../store/actions/getindicators.actions';
 import {IndicatorService} from '../services/indicator.service'
 import {Experiment, Variable, StrategyPosition} from '../models/experiment'

@@ -1,19 +1,24 @@
 import { Action } from '@ngrx/store';
-import { SendNewExperimentResponse, SubmitexperimentActionTypes } from '../actions/submitexperiment.actions';
+import { ExperimentActions, ExperimentActionTypes,SendNewExperimentResponse,SelectExperimentForComparison } from '../actions/experiment.actions';
+import { Experiment } from 'src/app/models/experiment';
 
 
 export interface State {
   newExperimentResponse:string;
+  experimentsCompare:Experiment[];
 }
 
 export const initialState: State = {
-  newExperimentResponse:""
+  newExperimentResponse:"",
+  experimentsCompare:[]
 };
 
-export function reducer(state = initialState, action: SendNewExperimentResponse): State {
+export function reducer(state = initialState, action: ExperimentActions): State {
   switch (action.type) {
-    case SubmitexperimentActionTypes.SendNewExperimentResponse:
+    case ExperimentActionTypes.SendNewExperimentResponse:
       return handleSetExperimentResponse(state,action);
+    case ExperimentActionTypes.SelectExperimentForComparison:
+      return handleSelectExperimentForComparison(state,action);
     default:
       return state;
   }
@@ -24,4 +29,9 @@ function handleSetExperimentResponse(state: State, action:SendNewExperimentRespo
     ...state,
     newExperimentResponse: action.payload
   };
+}
+
+function handleSelectExperimentForComparison(state: State, action:SelectExperimentForComparison ): State {
+  state.experimentsCompare.push(action.payload);
+  return state;
 }

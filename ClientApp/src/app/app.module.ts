@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +30,7 @@ import { ExperimentEffects } from './store/effects/experiment.effects';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { ManageExperimentsComponent } from './manage-experiments/manage-experiments.component';
 import { ExperimentDetailComponent } from './experiment-detail/experiment-detail.component';
+import { CompareComponent } from './compare/compare.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { ExperimentDetailComponent } from './experiment-detail/experiment-detail
     CreateExperimentComponent,
     AnalysisComponent,
     ManageExperimentsComponent,
-    ExperimentDetailComponent
+    ExperimentDetailComponent,
+    CompareComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { ExperimentDetailComponent } from './experiment-detail/experiment-detail
     RouterModule.forRoot([
       { path: '', component: CreateExperimentComponent,pathMatch: 'full' },
       { path: 'analysis', component: AnalysisComponent },
+      { path: 'compare',component: CompareComponent},
       { path: 'manage-experiments', component: ManageExperimentsComponent },
       { path: 'create-experiment', component: CreateExperimentComponent }
     ]),
@@ -58,6 +62,7 @@ import { ExperimentDetailComponent } from './experiment-detail/experiment-detail
     MatSidenavModule,
     MatSelectModule,
     MatCardModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatSnackBarModule,
     MatProgressBarModule,

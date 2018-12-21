@@ -45,7 +45,14 @@ export class AnalysisComponent implements OnInit {
 
   setupAnalysis(result:Experiment)
   {
+    
     this.experiment = result;
+    if(result==undefined)
+    {
+      return;
+    }
+      
+    
     let xvar:string = "Stop Loss";
     if(this.experiment.stoploss.staticOptions.length==0)
     {
@@ -75,5 +82,6 @@ export class AnalysisComponent implements OnInit {
 
 
   }
+
 
 }

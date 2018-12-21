@@ -7,6 +7,7 @@ import {Variable} from '../models/experiment';
 import * as fromState from '../store/reducers';
 
 import * as experimentAnalysisActions from '../store/actions/experimentAnalysis.actions';
+import * as experimentActions from '../store/actions/experiment.actions';
 
 @Component({
   selector: 'app-experiment-detail',
@@ -56,6 +57,11 @@ export class ExperimentDetailComponent implements OnInit {
   analyzeExperiment()
   {
     this.store.dispatch(new experimentAnalysisActions.SetExperimentAnalysis(this.experimentvalue));
+  }
+
+  compareExperiment()
+  {
+    this.store.dispatch(new experimentActions.SelectExperimentForComparison(this.experimentvalue));
   }
 
 
