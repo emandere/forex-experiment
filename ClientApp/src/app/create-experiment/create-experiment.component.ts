@@ -22,18 +22,9 @@ import {Experiment, Variable, StrategyPosition} from '../models/experiment'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateExperimentComponent implements OnInit {
+  experimentCreate:Experiment;
   indicators$: Observable<string[]>; 
   experimentSentResult$: Observable<string>; 
-  name:string='NewExperiment';
-  indicator:string='';
-  startdate:string='20170601';
-  enddate:string='20171101';
-  window:string='14';
-  units:string='2000';
-  startamount:string='2000';
-  stoploss:string='1.007';
-  takeprofit:string='0.993';
-  position:string='';
   positions:StrategyPosition[]=[
     {value: 'long', viewValue: 'long'},
     {value: 'short', viewValue: 'short'}
@@ -47,6 +38,9 @@ export class CreateExperimentComponent implements OnInit {
     private snackbar:MatSnackBar) { }
 
   ngOnInit() {
+     this.store.select(fromState.getExperimentsForCreate).subscribe(
+      result=> this.experimentCreate = result
+    );
     this.SetIndicators();
   }
 
@@ -59,19 +53,14 @@ export class CreateExperimentComponent implements OnInit {
 
   submitNewExperiment()
   {
-    let experiment = new Experiment;
-    experiment.name =this.name;
-    experiment.indicator=this.indicator;
-    experiment.startdate=this.startdate;
-    experiment.enddate=this.enddate;
-    experiment.position = this.position;
-    experiment.window = this.updateVariableT(this.window,parseInt);
-    experiment.units = this.updateVariableT(this.units,parseFloat);
-    experiment.stoploss = this.updateVariableT(this.stoploss,parseFloat);
-    experiment.takeprofit = this.updateVariableT(this.takeprofit,parseFloat);
+    
+    this.experimentCreate.window = this.updateVariableT(this.experimentCreate.window.displayValue,parseInt);
+    this.experimentCreate.units  = this.updateVariableT(this.experimentCreate.units.displayValue,parseFloat);
+    this.experimentCreate.stoploss = this.updateVariableT(this.experimentCreate.stoploss.displayValue,parseFloat);
+    this.experimentCreate.takeprofit = this.updateVariableT(this.experimentCreate.takeprofit.displayValue,parseFloat);
     
   
-    this.store.dispatch(new experimentActions.SendNewExperiment(experiment));
+    this.store.dispatch(new experimentActions.SendNewExperiment(this.experimentCreate));
     this.store.select(fromState.getExperimentSentResult).subscribe(
       result=>this.snackbar.open("Experiment",result,{ duration: 5000 })
     );
@@ -83,19 +72,17 @@ export class CreateExperimentComponent implements OnInit {
   updateVariableT(parms:string,parseFunc:(n:string)=>any)
   {
     if(parms.includes(","))
-        //return {staticOptions:parms.split(',').map(parseFunc),min:0,max:0,increment:0};
-        return new Variable<number>(parms.split(',').map(parseFunc),0,0,0);
+        return new Variable<number>({staticOptions:parms.split(',').map(parseFunc),min:0,max:0,increment:0});
 
     if(parms.includes("|"))
     {
         let args = parms.split('|');
-        //return {staticOptions:[],min:parseFunc(args[0]),max:parseFunc(args[1]),increment:parseFunc(args[2])};
-        return new Variable<number>([],parseFunc(args[0]),parseFunc(args[1]),parseFunc(args[2]));
+        
+        return new Variable<number>({staticOptions:[],min:parseFunc(args[0]),max:parseFunc(args[1]),increment:parseFunc(args[2])});
     }
     else
     {
-        //return {staticOptions:[parseFunc(parms)],min:0,max:0,increment:0};
-        return new Variable<number>([parseFunc(parms)],0,0,0);
+        return new Variable<number>({staticOptions:[parseFunc(parms)],min:0,max:0,increment:0});
     }
   }
 

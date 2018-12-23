@@ -12,19 +12,31 @@ export class Variable<T>
     min:T;
     max:T;
     increment:T;
-    display:string;
+    displayValue?:string;
+    
     constructor(
-        staticOptions: T[],
-        min: T,
-        max: T,
-        increment: T,
+        data?:any,
+        staticOptions?: T[],
+        min?: T,
+        max?: T,
+        increment?: T
     )
     {
-        this.staticOptions = staticOptions;
-        this.min = min;
-        this.max = max;
-        this.increment = increment;
+        Object.assign(this, data);
+        this.displayValue = this.display();
     }
+
+    display():string
+    {
+      if(this.staticOptions.length>0)
+      {
+          return this.staticOptions.toString();
+      }
+      else
+      {
+          return this.min.toString()+"|"+this.max.toString() +"|" + this.increment.toString();
+      }  
+    } 
     
 }
 export class SessionAnalysis
@@ -39,21 +51,38 @@ export class Experiment
    startdate:string;
    enddate:string;
    position:string;
-   percentcomplete:string;
-   complete:boolean;
+   percentcomplete?:string;
+   complete?:boolean;
    startamount:number;
    window:Variable<number>;
    units:Variable<number>;
    stoploss:Variable<number>;
    takeprofit:Variable<number>;
-   sessions:SessionAnalysis[];
-   constructor(){}
+   sessions?:SessionAnalysis[];
+   constructor(data: any) {
+    Object.assign(this, data);
+    if(data.startamount==0)
+    {
+        this.startamount = 2000.0;
+    }
+    this.units = new Variable<number>(data.units);
+    this.window = new Variable<number>(data.window);
+    this.stoploss = new Variable<number>(data.stoploss);
+    this.takeprofit = new Variable<number>(data.takeprofit);
+   }
    
    
 }
 
 export class ExperimentsResult {
     experiments:Experiment[];
+    constructor(data: any) 
+    {
+        Object.assign(this, data);
+        //const array = data as any[];
+        this.experiments = data.experiments.map(expr=>new Experiment(expr));
+        //console.log(data);
+    }
 }
 
 export interface StrategyPosition {

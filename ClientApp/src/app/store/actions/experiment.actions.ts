@@ -3,6 +3,7 @@ import {Experiment} from "../../models/experiment";
 export enum ExperimentActionTypes {
   LoadSubmitexperiments = '[Experiment] Load Submitexperiments',
   SendNewExperiment = '[Experiment] Send NewExperiment',
+  SendCreateExperiment = '[Experiment] Send CreateExperiment',
   SendNewExperimentResponse = '[Experiment] Send NewExperiment Response',
   SelectExperimentForComparison = '[Experiment] Select Experiment for Compare'
 }
@@ -26,4 +27,13 @@ export class SelectExperimentForComparison implements Action {
   constructor(public payload: Experiment) {}
 }
 
-export type ExperimentActions = LoadSubmitexperiments | SendNewExperiment | SendNewExperimentResponse | SelectExperimentForComparison;
+export class SendCreateExperiment implements Action {
+  readonly type = ExperimentActionTypes.SendCreateExperiment;
+  constructor(public payload: Experiment) {}
+}
+
+export type ExperimentActions = LoadSubmitexperiments 
+                                | SendNewExperiment 
+                                | SendNewExperimentResponse 
+                                | SendCreateExperiment
+                                | SelectExperimentForComparison;

@@ -22,6 +22,8 @@ namespace forex_experiment.Domain
         public string enddate{get;set;}
         
         public string position{get;set;}
+
+        public double startamount{get;set;}
         
         public Variable<int> window{get;set;}
        

@@ -109,7 +109,7 @@ namespace forex_experiment.Mapper
                 session.TradingStrategy = _mapper.Map<StrategyMongo>(_strategy);
                 session.Read = false;
                 session.ExperimentId = experiment.name;
-                session.StartAmount = 2000.0;
+                session.StartAmount = experiment.startamount;
                 await PushTradingStrategySession(session);
                 counter++;
             }

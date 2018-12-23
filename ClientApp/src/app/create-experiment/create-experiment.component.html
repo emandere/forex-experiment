@@ -5,23 +5,23 @@
     </mat-card-header>
     <mat-card-content align="left">
       <mat-form-field>
-                <input matInput [(ngModel)]="name" placeholder="Name">
+                <input matInput [(ngModel)]="experimentCreate.name" placeholder="Name">
       </mat-form-field> 
       <mat-form-field>
-        <input matInput [(ngModel)]="startamount" placeholder="Funds">
+        <input matInput [(ngModel)]="experimentCreate.startamount" placeholder="Funds">
       </mat-form-field>
       
       <br/> 
       <mat-form-field>
-          <input matInput [(ngModel)]="startdate" placeholder="Start Date" value="20170601">
+          <input matInput [(ngModel)]="experimentCreate.startdate" placeholder="Start Date" value="20170601">
       </mat-form-field>
       <mat-form-field>
-          <input matInput [(ngModel)]="enddate" placeholder="End Date" value="20171101">
+          <input matInput [(ngModel)]="experimentCreate.enddate" placeholder="End Date" value="20171101">
       </mat-form-field>
       
       <br/>
       <mat-form-field>
-          <input matInput [(ngModel)]="window" placeholder="Window {Start|Stop|Inc} or [A,B]" value="15">
+          <input matInput [(ngModel)]="experimentCreate.window.displayValue" placeholder="Window {Start|Stop|Inc} or [A,B]" value="15">
       </mat-form-field>
       <mat-form-field>
         <input matInput [(ngModel)]="units" placeholder="Units {Start|Stop|Inc} or [A,B]" value="2000">
@@ -29,21 +29,21 @@
       <br/>
       
       <mat-form-field>
-          <input matInput [(ngModel)]="stoploss" placeholder="Stop Loss {Start|Stop|Inc} or [A,B]" value="1.0">
+          <input matInput [(ngModel)]="experimentCreate.stoploss.displayValue" placeholder="Stop Loss {Start|Stop|Inc} or [A,B]" value="1.0">
       </mat-form-field>
       <mat-form-field>
-          <input matInput [(ngModel)]="takeprofit" placeholder="Take Profit {Start|Stop|Inc} or [A,B]" value="1.0">
+          <input matInput [(ngModel)]="experimentCreate.takeprofit.displayValue" placeholder="Take Profit {Start|Stop|Inc} or [A,B]" value="1.0">
       </mat-form-field>
      <br/>
       <mat-form-field >
-          <mat-select placeholder="Position" [(ngModel)]="position">
+          <mat-select placeholder="Position" [(ngModel)]="experimentCreate.position">
             <mat-option *ngFor="let localposition of positions" [value]="localposition.value">
                 {{localposition.viewValue}}
               </mat-option>
           </mat-select>
       </mat-form-field>  
       <mat-form-field>
-        <mat-select [(value)]="indicator" placeholder="Indicator">
+        <mat-select [(ngModel)]="experimentCreate.indicator" placeholder="Indicator">
             <mat-option *ngFor="let indicator of indicators$ | async" [value]="indicator">
                 {{indicator}}
             </mat-option>

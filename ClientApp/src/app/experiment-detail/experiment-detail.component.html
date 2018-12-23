@@ -32,9 +32,9 @@
         <td><div class ="sessioninfo">Window</div></td>
       </tr>
       <tr>
-          <td >{{unitsDisplay}}</td>
+          <td >{{experimentvalue.units.displayValue}}</td>
           <td></td>
-          <td>{{windowDisplay}}</td>
+          <td>{{this.experimentvalue.window.displayValue}}</td>
       </tr>
       <tr>
         <td><div class ="sessioninfo">Stop Loss</div></td>
@@ -42,15 +42,16 @@
         <td><div class ="sessioninfo">Take Profit</div></td>
       </tr>
       <tr>
-          <td >{{stopLossDisplay}}</td>
+          <td >{{this.experimentvalue.stoploss.displayValue}}</td>
           <td></td>
-          <td>{{takeProfitDisplay}}</td>
+          <td>{{this.experimentvalue.takeprofit.displayValue}}</td>
       </tr>
     </table>
     <mat-progress-bar *ngIf="!experimentvalue.complete" mode="determinate" value={{experimentvalue.percentcomplete}}></mat-progress-bar>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="compareExperiment()">Compare</button>
+    <button mat-button (click)="resubmitExperiment()">Resubmit</button>
     <button mat-button routerLink="/analysis" routerLinkActive="active" (click)="analyzeExperiment()">Analyze</button>
     <button mat-button (click)="deleteExperiment()">Delete</button>
   </mat-card-actions>

@@ -1,16 +1,29 @@
 import { Action } from '@ngrx/store';
-import { ExperimentActions, ExperimentActionTypes,SendNewExperimentResponse,SelectExperimentForComparison } from '../actions/experiment.actions';
-import { Experiment } from 'src/app/models/experiment';
+import { ExperimentActions, ExperimentActionTypes,SendNewExperimentResponse,SelectExperimentForComparison, SendCreateExperiment } from '../actions/experiment.actions';
+import { Experiment,Variable } from 'src/app/models/experiment';
 
 
 export interface State {
   newExperimentResponse:string;
   experimentsCompare:Experiment[];
+  experimentCreate:Experiment;
 }
 
 export const initialState: State = {
   newExperimentResponse:"",
-  experimentsCompare:[]
+  experimentsCompare:[],
+  experimentCreate:{
+    name:"NewExperimentState",
+    indicator:"RSIOverbought70",
+    startamount:2000,
+    startdate:"20170601",
+    enddate:"20171101",
+    position:"short",
+    window:new Variable<number>({staticOptions:[14]}),
+    units:new Variable<number>({staticOptions:[2000]}),
+    stoploss:new Variable<number>({staticOptions:[1.007]}),
+    takeprofit:new Variable<number>({staticOptions:[0.993]})
+  }
 };
 
 export function reducer(state = initialState, action: ExperimentActions): State {
@@ -19,6 +32,8 @@ export function reducer(state = initialState, action: ExperimentActions): State 
       return handleSetExperimentResponse(state,action);
     case ExperimentActionTypes.SelectExperimentForComparison:
       return handleSelectExperimentForComparison(state,action);
+    case ExperimentActionTypes.SendCreateExperiment:
+      return handleSendCreateExperiment(state,action);
     default:
       return state;
   }
@@ -28,6 +43,13 @@ function handleSetExperimentResponse(state: State, action:SendNewExperimentRespo
   return {
     ...state,
     newExperimentResponse: action.payload
+  };
+}
+
+function handleSendCreateExperiment(state: State, action:SendCreateExperiment ): State {
+  return {
+    ...state,
+    experimentCreate: action.payload
   };
 }
 

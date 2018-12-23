@@ -39,7 +39,8 @@ export class ExperimentsService {
 
   updateService() {
     this.http.get<ExperimentsResult>('/api/experiment/GetExperiments').subscribe(result => {
-      this.indicators.next(result.experiments);
+
+      this.indicators.next(new ExperimentsResult(result).experiments);
     }, error => console.error(error));
   }
 }

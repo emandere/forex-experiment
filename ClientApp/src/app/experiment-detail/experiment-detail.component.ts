@@ -16,33 +16,17 @@ import * as experimentActions from '../store/actions/experiment.actions';
 })
 export class ExperimentDetailComponent implements OnInit {
   @Input() experimentvalue:Experiment;
-  experiment:Experiment; 
-  unitsDisplay:string; 
-  windowDisplay:string;
-  stopLossDisplay:string;
-  takeProfitDisplay:string;
+  
+  
 
   constructor( private store:Store<fromState.State>,
     private experimentsService:ExperimentsService,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
-    this.unitsDisplay = this.display(this.experimentvalue.units);
-    this.windowDisplay = this.display(this.experimentvalue.window);
-    this.stopLossDisplay = this.display(this.experimentvalue.stoploss);
-    this.takeProfitDisplay = this.display(this.experimentvalue.takeprofit);
+    
   }
 
-  display(myvar:Variable<number>)
-  {
-      if(myvar.staticOptions.length>0)
-      {
-          return myvar.staticOptions.toString();
-      }
-      else
-      {
-          return myvar.min.toString()+"|"+myvar.max.toString() +"|" + myvar.increment.toString();
-      }  
-  } 
+  
 
  
 
@@ -62,6 +46,11 @@ export class ExperimentDetailComponent implements OnInit {
   compareExperiment()
   {
     this.store.dispatch(new experimentActions.SelectExperimentForComparison(this.experimentvalue));
+  }
+
+  resubmitExperiment()
+  {
+    this.store.dispatch(new experimentActions.SendCreateExperiment(this.experimentvalue));
   }
 
 
