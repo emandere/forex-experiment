@@ -54,6 +54,10 @@ function handleSendCreateExperiment(state: State, action:SendCreateExperiment ):
 }
 
 function handleSelectExperimentForComparison(state: State, action:SelectExperimentForComparison ): State {
-  state.experimentsCompare.push(action.payload);
-  return state;
+  //state.experimentsCompare.push(action.payload);
+  //return state;
+  return {
+    ...state,
+    experimentsCompare:[...state.experimentsCompare,action.payload]
+  }
 }
