@@ -61,15 +61,15 @@ export class CompareComponent implements OnInit {
       let sessionPL = experiments.map(experiment=>experiment.sessions.map(session=>session.PL)); 
       let a = _.zip.apply(_,sessionPL);
       this.data = _.zip(sessionsStopLoss,a).map(row=>_.flatMapDeep(row));
-      
-      
-
 
     }
     else
     {
       xvar ="Take Profit";
-      //this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.takeProfit,sess.PL]); 
+      let sessionsTakeProfit = experiments[0].sessions.map(session=>session.SessionStrategy.takeProfit);
+      let sessionPL = experiments.map(experiment=>experiment.sessions.map(session=>session.PL)); 
+      let a = _.zip.apply(_,sessionPL);
+      this.data = _.zip(sessionsTakeProfit,a).map(row=>_.flatMapDeep(row));
     }
     let headers =  experiments.map(experiment=>experiment.name);
     headers.unshift(xvar);
