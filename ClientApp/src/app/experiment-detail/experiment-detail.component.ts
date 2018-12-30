@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import {Observable} from 'rxjs/Rx';
 import { Experiment } from '../models/experiment';
 import {ExperimentsService} from '../services/experiments.service';
 import {MatSnackBar} from '@angular/material';
@@ -16,14 +17,29 @@ import * as experimentActions from '../store/actions/experiment.actions';
 })
 export class ExperimentDetailComponent implements OnInit {
   @Input() experimentvalue:Experiment;
-  
+  experimentsToCompare$:Observable<Experiment[]>;
+  isComparing:string="";
+
   
 
   constructor( private store:Store<fromState.State>,
     private experimentsService:ExperimentsService,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
-    
+    this.experimentsToCompare$ = this.store.select(fromState.getExperimentsForCompare);
+    this.experimentsToCompare$.subscribe(
+      compareExperiments=>
+      {
+        if(compareExperiments.some(x=>x.name==this.experimentvalue.name))
+        {
+           this.isComparing = "comparing";
+        }
+        else
+        {
+           this.isComparing = "";
+        }
+      }
+    )
   }
 
   

@@ -34,3 +34,4 @@ export const getExperimentSentResult = (state:State)=>state.experiment.newExperi
 export const getExperimentAnalysis = (state:State) => state.experimentAnalysis.experiment;
 export const getExperimentsForCompare = (state:State) => state.experiment.experimentsCompare;
 export const getExperimentsForCreate = (state:State) => state.experiment.experimentCreate;
+export const getExperimentsForManage = (state:State) => state.experiment.experimentsManage;

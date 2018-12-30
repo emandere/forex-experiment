@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { switchMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SendNewExperiment, ExperimentActionTypes, SendNewExperimentResponse } from '../actions/experiment.actions';
+import { SendNewExperiment, SetExperiments, ExperimentActionTypes, SendNewExperimentResponse } from '../actions/experiment.actions';
 import { map } from 'rxjs/operators';
 import { Send } from 'express-serve-static-core';
+import { Experiment,ExperimentsResult } from 'src/app/models/experiment';
 
 
 @Injectable()
@@ -24,7 +25,6 @@ export class ExperimentEffects {
     return httpOptions;
   }
   @Effect()
-  
   loadAuths$: Observable<Action> = this.actions$.pipe(
     ofType(ExperimentActionTypes.SendNewExperiment),
     map((action: SendNewExperiment) => action.payload),
@@ -33,6 +33,19 @@ export class ExperimentEffects {
         .pipe(
           map((response) => {
             return new SendNewExperimentResponse(JSON.stringify(response));
+          })
+        )
+    })
+  );
+
+  @Effect()
+  loadExperiments$: Observable<Action> = this.actions$.pipe(
+    ofType(ExperimentActionTypes.LoadExperiments),
+    switchMap(() => {
+      return this.http.get<ExperimentsResult>('/api/experiment/GetExperiments')
+        .pipe(
+          map((experimentResult) => {
+            return new SetExperiments(new ExperimentsResult(experimentResult).experiments);
           })
         )
     })

@@ -1,15 +1,21 @@
 import { Action } from '@ngrx/store';
 import {Experiment} from "../../models/experiment";
 export enum ExperimentActionTypes {
-  LoadSubmitexperiments = '[Experiment] Load Submitexperiments',
+  LoadExperiments = '[Experiment] Load Experiments',
+  SetExperiments = '[Experiment] Set Experiments',
   SendNewExperiment = '[Experiment] Send NewExperiment',
   SendCreateExperiment = '[Experiment] Send CreateExperiment',
   SendNewExperimentResponse = '[Experiment] Send NewExperiment Response',
   SelectExperimentForComparison = '[Experiment] Select Experiment for Compare'
 }
 
-export class LoadSubmitexperiments implements Action {
-  readonly type = ExperimentActionTypes.LoadSubmitexperiments;
+export class LoadExperiments implements Action {
+  readonly type = ExperimentActionTypes.LoadExperiments;
+}
+
+export class SetExperiments implements Action {
+  readonly type = ExperimentActionTypes.SetExperiments;
+  constructor(public payload: Experiment[]) {}
 }
 
 export class SendNewExperiment implements Action {
@@ -32,7 +38,8 @@ export class SendCreateExperiment implements Action {
   constructor(public payload: Experiment) {}
 }
 
-export type ExperimentActions = LoadSubmitexperiments 
+export type ExperimentActions = LoadExperiments 
+                                | SetExperiments
                                 | SendNewExperiment 
                                 | SendNewExperimentResponse 
                                 | SendCreateExperiment
