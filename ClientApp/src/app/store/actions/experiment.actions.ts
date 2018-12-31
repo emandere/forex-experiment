@@ -6,7 +6,8 @@ export enum ExperimentActionTypes {
   SendNewExperiment = '[Experiment] Send NewExperiment',
   SendCreateExperiment = '[Experiment] Send CreateExperiment',
   SendNewExperimentResponse = '[Experiment] Send NewExperiment Response',
-  SelectExperimentForComparison = '[Experiment] Select Experiment for Compare'
+  SelectExperimentForComparison = '[Experiment] Select Experiment for Compare',
+  RemoveExperimentForComparison ='[Experiment] Remove Experiment for Compare'
 }
 
 export class LoadExperiments implements Action {
@@ -38,9 +39,15 @@ export class SendCreateExperiment implements Action {
   constructor(public payload: Experiment) {}
 }
 
+export class RemoveExperimentForComparison implements Action{
+  readonly type = ExperimentActionTypes.RemoveExperimentForComparison
+  constructor (public payload:string){}
+}
+
 export type ExperimentActions = LoadExperiments 
                                 | SetExperiments
                                 | SendNewExperiment 
                                 | SendNewExperimentResponse 
                                 | SendCreateExperiment
-                                | SelectExperimentForComparison;
+                                | SelectExperimentForComparison
+                                | RemoveExperimentForComparison;

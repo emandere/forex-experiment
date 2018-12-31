@@ -19,6 +19,8 @@ export class ExperimentDetailComponent implements OnInit {
   @Input() experimentvalue:Experiment;
   experimentsToCompare$:Observable<Experiment[]>;
   isComparing:string="";
+  compareButton:string="Compare";
+
 
   
 
@@ -33,10 +35,12 @@ export class ExperimentDetailComponent implements OnInit {
         if(compareExperiments.some(x=>x.name==this.experimentvalue.name))
         {
            this.isComparing = "comparing";
+           this.compareButton = "De-Compare"
         }
         else
         {
            this.isComparing = "";
+           this.compareButton = "Compare"
         }
       }
     )
@@ -61,7 +65,13 @@ export class ExperimentDetailComponent implements OnInit {
 
   compareExperiment()
   {
-    this.store.dispatch(new experimentActions.SelectExperimentForComparison(this.experimentvalue));
+    if(this.isComparing=="")
+    {
+      this.store.dispatch(new experimentActions.SelectExperimentForComparison(this.experimentvalue));
+    }
+    else{
+      this.store.dispatch(new experimentActions.RemoveExperimentForComparison(this.experimentvalue.name));
+    }
   }
 
   resubmitExperiment()
