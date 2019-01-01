@@ -31,7 +31,7 @@ export class SendNewExperimentResponse implements Action {
 
 export class SelectExperimentForComparison implements Action {
   readonly type = ExperimentActionTypes.SelectExperimentForComparison;
-  constructor(public payload: Experiment) {}
+  constructor(public payload: string) {}
 }
 
 export class SendCreateExperiment implements Action {

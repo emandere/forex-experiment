@@ -13,7 +13,7 @@ import { Experiment,Variable } from 'src/app/models/experiment';
 
 export interface State {
   newExperimentResponse:string;
-  experimentsCompare:Experiment[];
+  experimentsCompare:string[];
   experimentCreate:Experiment;
   experimentsManage:Experiment[]
 }
@@ -86,7 +86,7 @@ function  handleSetExperiments(state:State,action:SetExperiments):State
 
 function handleRemoveExperimentForComparison(state:State,action:RemoveExperimentForComparison)
 {
-  let experimentPos = state.experimentsCompare.findIndex(x=>x.name==action.payload);
+  let experimentPos = state.experimentsCompare.findIndex(x=>x==action.payload);
   return {
     ...state,
     experimentsCompare:[...state.experimentsCompare.slice(0,experimentPos),

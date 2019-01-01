@@ -8,7 +8,7 @@ export enum ExperimentAnalysisActionTypes {
 export class SetExperimentAnalysis implements Action {
   readonly type = ExperimentAnalysisActionTypes.SetExperimentAnalysis;
  
-  constructor(public payload: Experiment) {}
+  constructor(public payload: string) {}
 }
 
 export type ExperimentAnalysisActions = SetExperimentAnalysis;

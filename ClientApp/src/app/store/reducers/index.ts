@@ -31,7 +31,16 @@ export const reducers: ActionReducerMap<State> = {
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
 export const getIndicators = (state: State) => state.indicators.indicatorNames;
 export const getExperimentSentResult = (state:State)=>state.experiment.newExperimentResponse;
-export const getExperimentAnalysis = (state:State) => state.experimentAnalysis.experiment;
-export const getExperimentsForCompare = (state:State) => state.experiment.experimentsCompare;
+export const getExperimentAnalysis = (state:State) => state.experiment
+                                                            .experimentsManage
+                                                            .find(x=>x.name==state.experimentAnalysis.experiment);
+                                                            
+export const getExperimentsForCompare = (state:State) => state.experiment
+                                                              .experimentsManage
+                                                              .filter( 
+                                                                  experiment=>state.experiment
+                                                                          .experimentsCompare
+                                                                          .some(x=>x===experiment.name)
+                                                                );
 export const getExperimentsForCreate = (state:State) => state.experiment.experimentCreate;
 export const getExperimentsForManage = (state:State) => state.experiment.experimentsManage;

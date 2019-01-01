@@ -2,11 +2,11 @@ import { Action } from '@ngrx/store';
 import * as ExperimentAnalysisActions from '../actions/experimentAnalysis.actions';
 import {Experiment} from '../../models/experiment';
 export interface State {
-  experiment:Experiment;
+  experiment:string;
 }
 
 export const initialState: State = {
-  experiment:undefined
+  experiment:""
 };
 
 export function reducer(state = initialState, action: ExperimentAnalysisActions.ExperimentAnalysisActions): State {

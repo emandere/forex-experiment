@@ -60,14 +60,14 @@ export class ExperimentDetailComponent implements OnInit {
 
   analyzeExperiment()
   {
-    this.store.dispatch(new experimentAnalysisActions.SetExperimentAnalysis(this.experimentvalue));
+    this.store.dispatch(new experimentAnalysisActions.SetExperimentAnalysis(this.experimentvalue.name));
   }
 
   compareExperiment()
   {
     if(this.isComparing=="")
     {
-      this.store.dispatch(new experimentActions.SelectExperimentForComparison(this.experimentvalue));
+      this.store.dispatch(new experimentActions.SelectExperimentForComparison(this.experimentvalue.name));
     }
     else{
       this.store.dispatch(new experimentActions.RemoveExperimentForComparison(this.experimentvalue.name));

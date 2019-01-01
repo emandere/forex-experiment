@@ -52,7 +52,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="compareExperiment()">{{this.compareButton}}</button>
-    <button mat-button (click)="resubmitExperiment()">Resubmit</button>
+    <button mat-button routerLink="/create-experiment" routerLinkActive="active" (click)="resubmitExperiment()">Resubmit</button>
     <button mat-button routerLink="/analysis" routerLinkActive="active" (click)="analyzeExperiment()">Analyze</button>
     <button mat-button (click)="deleteExperiment()">Delete</button>
   </mat-card-actions>
