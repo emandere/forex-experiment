@@ -29,5 +29,9 @@ namespace forex_experiment.Models
         public string percentcomplete{get;set;}
         public bool complete{get;set;}
 
+        public string starttime{get;set;}
+        public string endtime{get;set;}
+        public string elapsedtime{get;set;}
+
     }
 }

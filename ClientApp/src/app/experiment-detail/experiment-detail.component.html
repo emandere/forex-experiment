@@ -47,6 +47,16 @@
           <td></td>
           <td>{{this.experimentvalue.takeprofit.displayValue}}</td>
       </tr>
+      <tr *ngIf="experimentvalue.complete">
+        <td><div class ="sessioninfo">Elapsed Time</div></td>
+        <td></td>
+        <td><div class ="sessioninfo">Session Count</div></td>
+      </tr>
+      <tr *ngIf="experimentvalue.complete">
+          <td >{{this.experimentvalue.elapsedtime}}</td>
+          <td></td>
+          <td>{{this.experimentvalue.sessions.length}}</td>
+      </tr>
     </table>
     <mat-progress-bar *ngIf="!experimentvalue.complete" mode="determinate" value={{experimentvalue.percentcomplete}}></mat-progress-bar>
   </mat-card-content>

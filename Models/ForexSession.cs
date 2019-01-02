@@ -45,6 +45,13 @@ namespace forex_experiment.Models
 
         [BsonElement("percentComplete")]
         public string PercentComplete { get; set; }
+
+        [BsonElement("elapsedTime")]
+        public string elapsedTime { get; set; }
+        [BsonElement("beginSessionTime")]
+        public string beginSessionTime { get; set; }
+        [BsonElement("endSessionTime")]
+        public string endSessionTime { get; set; }
     }
 
     public  class SessionUser

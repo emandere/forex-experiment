@@ -59,6 +59,7 @@ export class Experiment
    stoploss:Variable<number>;
    takeprofit:Variable<number>;
    sessions?:SessionAnalysis[];
+   elapsedtime?:string;
    constructor(data: any) {
     Object.assign(this, data);
     if(data.startamount==0)

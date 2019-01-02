@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using MongoDB.Driver;
 using forex_experiment.Repository;
 using forex_experiment.Domain;
 using forex_experiment.Models;
+
 
 
 namespace forex_experiment.Mapper
@@ -43,9 +45,32 @@ namespace forex_experiment.Mapper
                 double percentcomplete = ((double) sessionsCompleteCount / (double) totalCount)*100;
                 experiment.percentcomplete = percentcomplete.ToString();
                 if(percentcomplete>=100.0)
+                {
                     experiment.complete =true;
+                    //int totaltime = sessions.Select((x)=>int.Parse(x.elapsedTime)).Sum();
+                    DateTime startTime = sessions.Select((x)=>DateTime.Parse(x.beginSessionTime)).Min();
+                    DateTime endTime = sessions.Select((x)=>DateTime.Parse(x.endSessionTime)).Max();
+                    experiment.elapsedtime= ((TimeSpan)(endTime -startTime)).TotalSeconds.ToString();
+                    /* if(string.IsNullOrEmpty(experiment.endtime))
+                    {
+                        experiment.endtime =DateTime.Now.ToLongTimeString();
+                        DateTime startTime = DateTime.Parse(experiment.starttime);
+                        DateTime endTime = DateTime.Parse(experiment.endtime);
+                        experiment.elapsedtime= ((TimeSpan)(endTime -startTime)).Minutes.ToString();
+                        await SaveExperimentTime(experiment);
+                        
+                    }*/
+
+                    //DateTime startTime2 = DateTime.Parse(experiment.starttime);
+                    //DateTime endTime2 = DateTime.Parse(experiment.endtime);
+                    //experiment.elapsedtime= ((TimeSpan)(endTime2 -startTime2)).Minutes.ToString();
+                }
                 else
+                {
                     experiment.complete=false;
+                    experiment.endtime = string.Empty;
+                    experiment.elapsedtime =string.Empty;
+                }
                     
                 
                 foreach(ForexSession session in sessions)
@@ -83,6 +108,24 @@ namespace forex_experiment.Mapper
             
         }
 
+         public async Task SaveExperimentTime(ForexExperiment experiment)
+        {
+            var expMongo = _mapper.Map<ForexExperimentMongo>(experiment);
+            var filter = Builders<ForexExperimentMongo>.Filter.Eq(exp => exp.name, expMongo.name);
+            await _context.Experiments.ReplaceOneAsync(filter, expMongo, new UpdateOptions {IsUpsert = true});
+
+
+            /* await _context.Experiments.FindOneAndUpdateAsync<ForexExperimentMongo>(
+                                e=>e.name==expMongo.name,
+                                Builders<ForexExperimentMongo>.Update.Set(e=>e.endtime,experiment.endtime)
+                                );
+            await _context.Experiments.FindOneAndUpdateAsync<ForexExperimentMongo>(
+                                e=>e.name==item.name,
+                                Builders<ForexExperimentMongo>.Update.Set(e=>e.elapsedtime,experiment.elapsedtime)
+                                );*/
+            
+        }
+
         public async Task PushTradingStrategySession(TradingSession item)
         {
         
@@ -97,6 +140,7 @@ namespace forex_experiment.Mapper
 
         public async Task<string> CreateExperiment(ForexExperiment experiment)
         {
+            experiment.starttime =DateTime.Now.ToLongTimeString();
             await AddExperiment(_mapper.Map<ForexExperimentMongo>(experiment));
             List<Strategy> _strategies = experiment.GetStrategies();
             int counter = 0;
