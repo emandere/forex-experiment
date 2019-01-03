@@ -44,9 +44,9 @@ namespace forex_experiment.Domain
                 return _sessions;
             }
 
-            private set
+            set
             {
-
+                _sessions = value;    
             }
         }
 

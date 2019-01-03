@@ -97,6 +97,10 @@ namespace forex_experiment.Mapper
 
 
                 }
+
+                experiment.sessions = experiment.sessions.OrderBy(o=>o.SessionStrategy.stopLoss)
+                                   .ThenBy(o=>o.SessionStrategy.takeProfit)
+                                   .ToList();
             }
             return experiments;
         }
