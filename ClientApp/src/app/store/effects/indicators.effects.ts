@@ -15,7 +15,7 @@ export class IndicatorsEffects {
   loadAuths$: Observable<Action> = this.actions$.pipe(
     ofType(myIndndicatorActions.GetindicatorsActionTypes.LoadGetindicators),
     switchMap(() => {
-      return this.http.get<string[]>('http://localhost:122/api/forexclasses/v1/rules')
+      return this.http.get<string[]>('http://192.168.1.94:122/api/forexclasses/v1/rules')
         .pipe(
           map((indicators) => {
             return new myIndndicatorActions.SetIndicators(indicators);
