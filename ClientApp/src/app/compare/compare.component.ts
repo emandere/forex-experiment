@@ -12,6 +12,7 @@ import * as fromState from '../store/reducers';
   styleUrls: ['./compare.component.css']
 })
 export class CompareComponent implements OnInit {
+  chartWidth: number;
   experiments$: Observable<Experiment[]>;
   title:string = "PL vs Stop Loss";
   type:string ="LineChart";
@@ -37,6 +38,14 @@ export class CompareComponent implements OnInit {
   constructor(private store: Store<fromState.State>) { }
 
   ngOnInit() {
+    if(window.innerWidth < 450)
+    {
+      this.chartWidth = 340;
+    }
+    else
+    {
+      this.chartWidth = 800;
+    }
     this.experiments$ = this.store.select(fromState.getExperimentsForCompare);
     this.experiments$.subscribe(
       result => this.setupCompare(result)
