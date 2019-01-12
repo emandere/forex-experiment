@@ -137,6 +137,18 @@ namespace forex_experiment.Mapper
             
         }
 
+        public async Task<IEnumerable<TradingSession>> GetAllQueuedSessions()
+        {
+            return await _context.TradingSessionQueue.Find(_=>true).ToListAsync();
+        }
+
+        public async Task<IEnumerable<TradingSession>> GetInProcessSessions()
+        {
+            return await _context.TradingSessionQueue.Find(x=>x.Read==false).ToListAsync();
+        }
+
+        
+
         public async Task DeleteExperiment(string name)
         {
             await _context.Experiments.DeleteOneAsync(item=>item.name==name);

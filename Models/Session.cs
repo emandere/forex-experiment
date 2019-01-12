@@ -1,9 +1,11 @@
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 namespace forex_experiment.Models
 {
     public class TradingSession
     {
+        public ObjectId Id { get; set; }
         [BsonElement("strategy")]
         public StrategyMongo TradingStrategy{get;set;}
         [BsonElement("name")]
