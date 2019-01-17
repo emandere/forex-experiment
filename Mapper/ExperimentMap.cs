@@ -32,6 +32,12 @@ namespace forex_experiment.Mapper
             return result;
         }
 
+        public async Task<ForexSession> GetForexSession(string sessionId)
+        {
+            var result = await _context.ForexSessions.Find((s)=>s.Id==sessionId).SingleOrDefaultAsync();
+            return result;
+        }
+
         public async Task<IEnumerable<ForexExperiment>> GetExperiments()
         {
             var experimentsMongo = await _context.Experiments.Find(_ => true).ToListAsync();
@@ -139,7 +145,14 @@ namespace forex_experiment.Mapper
 
         public async Task<IEnumerable<TradingSession>> GetAllQueuedSessions()
         {
-            return await _context.TradingSessionQueue.Find(_=>true).ToListAsync();
+            List<TradingSession> tradingSessions = await _context.TradingSessionQueue.Find(x=>x.Read==true).ToListAsync();
+            foreach(TradingSession tradingSession in tradingSessions)
+            {
+                ForexSession session = await GetForexSession(tradingSession.Name);
+                if(session!=null)
+                    tradingSession.percentcomplete = session.PercentComplete;
+            }
+            return  tradingSessions;
         }
 
         public async Task<IEnumerable<TradingSession>> GetInProcessSessions()

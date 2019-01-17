@@ -20,6 +20,7 @@ namespace forex_experiment.Models
         public bool Read{get;set;}
         [BsonElement("experimentId")]
         public string ExperimentId{get;set;}
+        public string percentcomplete{get;set;}
 
 
     }
