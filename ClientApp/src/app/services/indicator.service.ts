@@ -16,7 +16,7 @@ export class IndicatorService {
   }
 
   updateService() {
-    this.http.get<string[]>('http://192.168.1.94:122/api/forexclasses/v1/rules').subscribe(result => {
+    this.http.get<string[]>('http://localhost:122/api/forexclasses/v1/rules').subscribe(result => {
       this.indicators.next(result);
     }, error => console.error(error));
   }
