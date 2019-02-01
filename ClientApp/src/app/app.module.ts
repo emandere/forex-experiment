@@ -31,6 +31,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { ManageExperimentsComponent } from './manage-experiments/manage-experiments.component';
 import { ExperimentDetailComponent } from './experiment-detail/experiment-detail.component';
 import { CompareComponent } from './compare/compare.component';
+import { QueueComponent } from './queue/queue.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CompareComponent } from './compare/compare.component';
     AnalysisComponent,
     ManageExperimentsComponent,
     ExperimentDetailComponent,
-    CompareComponent
+    CompareComponent,
+    QueueComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { CompareComponent } from './compare/compare.component';
       { path: 'analysis', component: AnalysisComponent },
       { path: 'compare',component: CompareComponent},
       { path: 'manage-experiments', component: ManageExperimentsComponent },
+      { path: 'queue', component: QueueComponent },
       { path: 'create-experiment', component: CreateExperimentComponent }
     ]),
     MatButtonModule,

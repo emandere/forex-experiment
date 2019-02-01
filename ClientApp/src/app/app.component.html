@@ -25,6 +25,10 @@
                     <mat-icon mat-list-icon>view_list</mat-icon>
                     <h4 mat-line>Experiments</h4>
                 </a>
+                <a mat-list-item routerLink="/queue" routerLinkActive="active" (click)="drawer.toggle()" >
+                    <mat-icon mat-list-icon>view_list</mat-icon>
+                    <h4 mat-line>Queue</h4>
+                </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
