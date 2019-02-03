@@ -10,6 +10,7 @@ import * as fromIndicators from './indicators.reducer';
 import * as fromExperiment from './experiment.reducer';
 import * as fromExperimentAnalysis from './experimentAnalysis.reducer';
 import { Experiment } from 'src/app/models/experiment';
+import * as fromSessions from './sessions.reducer';
 
 
 export interface State {
@@ -17,6 +18,8 @@ export interface State {
   indicators: fromIndicators.State;
   experiment: fromExperiment.State;
   experimentAnalysis:fromExperimentAnalysis.State;
+  sessions: fromSessions.State;
+
   
 }
 
@@ -24,7 +27,8 @@ export const reducers: ActionReducerMap<State> = {
 
   indicators: fromIndicators.reducer,
   experiment: fromExperiment.reducer,
-  experimentAnalysis:fromExperimentAnalysis.reducer
+  experimentAnalysis:fromExperimentAnalysis.reducer,
+  sessions: fromSessions.reducer
 };
 
 
@@ -44,3 +48,4 @@ export const getExperimentsForCompare = (state:State) => state.experiment
                                                                 );
 export const getExperimentsForCreate = (state:State) => state.experiment.experimentCreate;
 export const getExperimentsForManage = (state:State) => state.experiment.experimentsManage;
+export const getSessions = (state:State) => state.sessions.sessions;

@@ -1,3 +1,9 @@
 <p>
   <button mat-raised-button color="primary" (click)="clearQueue()">Clear Queue</button>
 </p>
+
+<mat-list>
+  <ng-container *ngFor="let session of sessions$ | async">
+    <p>{{session}}</p>
+  </ng-container>
+</mat-list>

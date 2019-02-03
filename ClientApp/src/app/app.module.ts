@@ -32,6 +32,7 @@ import { ManageExperimentsComponent } from './manage-experiments/manage-experime
 import { ExperimentDetailComponent } from './experiment-detail/experiment-detail.component';
 import { CompareComponent } from './compare/compare.component';
 import { QueueComponent } from './queue/queue.component';
+import { SessionsEffects } from './store/effects/sessions.effects';
 
 
 @NgModule({
@@ -72,7 +73,7 @@ import { QueueComponent } from './queue/queue.component';
     FormsModule,
     GoogleChartsModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects]),
+    EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects, SessionsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
