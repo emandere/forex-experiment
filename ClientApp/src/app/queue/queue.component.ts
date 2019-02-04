@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import { Store } from '@ngrx/store';
-import * as fromState from '../store/reducers';
 import {Observable} from 'rxjs/Rx';
-
+import * as fromState from '../store/reducers';
+import * as fromSessionActions from '../store/actions/sessions.actions';
 @Component({
   selector: 'app-queue',
   templateUrl: './queue.component.html',
@@ -17,6 +17,8 @@ export class QueueComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(new fromSessionActions.LoadSessions());
+    //this.store.dispatch(new fromSessionActions.SetSessions(["Hi"]));
     this.sessions$=this.store.select(fromState.getSessions);
   }
 

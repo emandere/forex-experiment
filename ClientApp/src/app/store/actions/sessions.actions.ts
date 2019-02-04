@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export enum SessionsActionTypes {
   LoadSessions = '[Sessions] Load Sessions',
-  SetSessions = '[Sessions] Load Sessions'
+  SetSessions = '[Sessions] Set Sessions'
 }
 
 export class LoadSessions implements Action {
