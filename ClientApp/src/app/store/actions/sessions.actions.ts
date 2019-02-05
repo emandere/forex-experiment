@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import {Session} from '../../models/session';
 
 export enum SessionsActionTypes {
   LoadSessions = '[Sessions] Load Sessions',
@@ -10,7 +11,7 @@ export class LoadSessions implements Action {
 }
 export class SetSessions implements Action {
   readonly type = SessionsActionTypes.SetSessions;
-  constructor(public payload: string[]) {} 
+  constructor(public payload: Session[]) {} 
 }
 
 export type SessionsActions = LoadSessions | SetSessions;

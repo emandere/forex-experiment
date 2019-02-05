@@ -5,7 +5,7 @@ import { switchMap,map } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import * as mySessionActions from '../actions/sessions.actions';
 import { HttpClient } from '@angular/common/http';
-
+import {SessionResult,Session} from '../../models/session';
 
 @Injectable()
 export class SessionsEffects {
@@ -17,10 +17,10 @@ export class SessionsEffects {
   loadQueueSessions$: Observable<Action> = this.actions$.pipe(
     ofType(mySessionActions.SessionsActionTypes.LoadSessions),
     switchMap(() => {
-      return this.http.get<string[]>('http://localhost:122/api/forexclasses/v1/rules')
+      return this.http.get<SessionResult>('/api/sessionqueue/GetQueuedSessions')
         .pipe(
-          map((indicators) => {
-            return new mySessionActions.SetSessions(indicators);
+          map((sessionResult) => {
+            return new mySessionActions.SetSessions(sessionResult.sessions);
           })
         )
     })

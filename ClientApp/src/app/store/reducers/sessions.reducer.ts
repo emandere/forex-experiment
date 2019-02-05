@@ -1,13 +1,14 @@
 import { Action } from '@ngrx/store';
+import {Session} from '../../models/session';
 import { SessionsActionTypes, SetSessions,SessionsActions } from '../actions/sessions.actions';
 
 
 export interface State {
-  sessions:string[];
+  sessions:Session[];
 }
 
 export const initialState: State = {
-  sessions:["hello","world"]
+  sessions:[]
 };
 
 export function reducer(state = initialState, action: SessionsActions): State {

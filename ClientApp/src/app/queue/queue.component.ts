@@ -4,13 +4,14 @@ import { Store } from '@ngrx/store';
 import {Observable} from 'rxjs/Rx';
 import * as fromState from '../store/reducers';
 import * as fromSessionActions from '../store/actions/sessions.actions';
+import { Session } from '../models/session';
 @Component({
   selector: 'app-queue',
   templateUrl: './queue.component.html',
   styleUrls: ['./queue.component.css']
 })
 export class QueueComponent implements OnInit {
-  sessions$: Observable<string[]>; 
+  sessions$: Observable<Session[]>; 
   constructor( private snackbar:MatSnackBar,
                private store: Store<fromState.State>) {
 
