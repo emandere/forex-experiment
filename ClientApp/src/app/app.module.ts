@@ -33,6 +33,7 @@ import { ExperimentDetailComponent } from './experiment-detail/experiment-detail
 import { CompareComponent } from './compare/compare.component';
 import { QueueComponent } from './queue/queue.component';
 import { SessionsEffects } from './store/effects/sessions.effects';
+import { SessionComponent } from './session/session.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { SessionsEffects } from './store/effects/sessions.effects';
     ManageExperimentsComponent,
     ExperimentDetailComponent,
     CompareComponent,
-    QueueComponent
+    QueueComponent,
+    SessionComponent
   ],
   imports: [
     BrowserModule,
