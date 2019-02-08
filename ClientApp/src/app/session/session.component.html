@@ -4,7 +4,68 @@
         <mat-card-title>{{sessionInfo.Name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-
+            <table  style="width:280px;margin-left:50px">
+                    <tr>
+                        <td><div class ="sessioninfo">Start Date</div></td>
+                        <td></td>
+                        <td><div class ="sessioninfo">Current Date</div></td>
+                    </tr>
+                    <tr>
+                        <td>{{sessionInfo.StartDate}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.EndDate}}</td>
+                    </tr>
+                    <tr>
+                        <td><div class ="sessioninfo">Start Amount</div></td>
+                        <td></td>
+                        <td><div class ="sessioninfo">Percent Complete</div></td>
+                    </tr>
+                    <tr>
+                        <td>{{sessionInfo.StartAmount}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.percentcomplete}}</td>
+                    </tr>
+                    <tr>
+                        <td><div class ="sessioninfo">Read</div></td>
+                        <td></td>
+                        <td><div class ="sessioninfo">Experiment Id</div></td>
+                    </tr>
+                    <tr>
+                        <td>{{sessionInfo.Read}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.ExperimentId}}</td>
+                    </tr>
+                    <tr>
+                        <td><div class ="sessioninfo">Window</div></td>
+                        <td></td>
+                        <td><div class ="sessioninfo">Rule</div></td>
+                    </tr>
+                    <tr>
+                        <td>{{sessionInfo.TradingStrategy.window}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.TradingStrategy.ruleName}}</td>
+                    </tr>
+                    <tr>
+                            <td><div class ="sessioninfo">Stop Loss</div></td>
+                            <td></td>
+                            <td><div class ="sessioninfo">Take Profit</div></td>
+                    </tr>
+                    <tr>
+                        <td>{{sessionInfo.TradingStrategy.stopLoss}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.TradingStrategy.takeProfit}}</td>
+                    </tr>
+                    <tr>
+                            <td><div class ="sessioninfo">Units</div></td>
+                            <td></td>
+                            <td><div class ="sessioninfo">Position</div></td>
+                    </tr>
+                    <tr>
+                        <td>{{sessionInfo.TradingStrategy.units}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.TradingStrategy.position}}</td>
+                    </tr>
+            </table>
       </mat-card-content> 
 
 </mat-card>
