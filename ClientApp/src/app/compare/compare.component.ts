@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 
 import * as fromState from '../store/reducers';
+import {Variable} from '../models/experiment';
 
 @Component({
   selector: 'app-compare',
@@ -36,6 +37,8 @@ export class CompareComponent implements OnInit {
   };
 
   constructor(private store: Store<fromState.State>) { }
+  
+  
 
   ngOnInit() {
     if(window.innerWidth < 450)
@@ -52,6 +55,8 @@ export class CompareComponent implements OnInit {
     )
   }
 
+  
+
   setupCompare(experiments:Experiment[])
   {
     
@@ -67,6 +72,9 @@ export class CompareComponent implements OnInit {
     {
       //let sessions = experiments.map(experiment=>experiment.sessions); 
       let sessionsStopLoss = experiments[0].sessions.map(session=>session.SessionStrategy.stopLoss);
+      //let sessionNormalizeStopLoss = sessionsStopLoss.map(x=>{
+      //    if(x>1.0)
+      //})
       let sessionPL = experiments.map(experiment=>experiment.sessions.map(session=>session.PL)); 
       let a = _.zip.apply(_,sessionPL);
       this.data = _.zip(sessionsStopLoss,a).map(row=>_.flatMapDeep(row));
@@ -75,7 +83,13 @@ export class CompareComponent implements OnInit {
     else
     {
       xvar ="Take Profit";
-      let sessionsTakeProfit = experiments[0].sessions.map(session=>session.SessionStrategy.takeProfit);
+      let sessionsTakeProfit = experiments[0].sessions.map(session=>{
+        if(session.SessionStrategy.takeProfit > 0)
+          return 1 - session.SessionStrategy.takeProfit;
+        else
+          return session.SessionStrategy.takeProfit - 1;
+      });
+      
       let sessionPL = experiments.map(experiment=>experiment.sessions.map(session=>session.PL)); 
       let a = _.zip.apply(_,sessionPL);
       this.data = _.zip(sessionsTakeProfit,a).map(row=>_.flatMapDeep(row));
