@@ -70,11 +70,14 @@ export class CompareComponent implements OnInit {
     let xvar:string = "Stop Loss";
     if(experiments[0].stoploss.staticOptions.length==0)
     {
-      //let sessions = experiments.map(experiment=>experiment.sessions); 
-      let sessionsStopLoss = experiments[0].sessions.map(session=>session.SessionStrategy.stopLoss);
-      //let sessionNormalizeStopLoss = sessionsStopLoss.map(x=>{
-      //    if(x>1.0)
-      //})
+      
+      let sessionsStopLoss = experiments[0].sessions.map(session=>{
+        if(session.SessionStrategy.stopLoss > 0)
+          return 1 - session.SessionStrategy.stopLoss;
+        else
+          return session.SessionStrategy.stopLoss - 1;
+      });
+      
       let sessionPL = experiments.map(experiment=>experiment.sessions.map(session=>session.PL)); 
       let a = _.zip.apply(_,sessionPL);
       this.data = _.zip(sessionsStopLoss,a).map(row=>_.flatMapDeep(row));

@@ -43,6 +43,15 @@ export class AnalysisComponent implements OnInit {
     
   }
 
+  normalize(x:number):number
+  {
+     if(x>0){
+        return 1 - x;
+     } else {
+       return x - 1;
+     }
+  }
+
   setupAnalysis(result:Experiment)
   {
     
@@ -56,13 +65,14 @@ export class AnalysisComponent implements OnInit {
     let xvar:string = "Stop Loss";
     if(this.experiment.stoploss.staticOptions.length==0)
     {
-      this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.stopLoss,sess.PL]);
+
+      this.data = this.experiment.sessions.map(sess=>[this.normalize(sess.SessionStrategy.stopLoss),sess.PL]);
 
     }
     else
     {
       xvar ="Take Profit";
-      this.data = this.experiment.sessions.map(sess=>[sess.SessionStrategy.takeProfit,sess.PL]); 
+      this.data = this.experiment.sessions.map(sess=>[this.normalize(sess.SessionStrategy.takeProfit),sess.PL]); 
     }
     this.title = "PL vs "+xvar;
     this.columnNames = [xvar,'Profit'];
