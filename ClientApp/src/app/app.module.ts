@@ -34,7 +34,7 @@ import { CompareComponent } from './compare/compare.component';
 import { QueueComponent } from './queue/queue.component';
 import { SessionsEffects } from './store/effects/sessions.effects';
 import { SessionComponent } from './session/session.component';
-
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   declarations: [
@@ -73,7 +73,8 @@ import { SessionComponent } from './session/session.component';
     MatSnackBarModule,
     MatProgressBarModule,
     FormsModule,
-    GoogleChartsModule.forRoot(),
+    Ng2GoogleChartsModule,
+    /*GoogleChartsModule.forRoot(),*/
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects, SessionsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []

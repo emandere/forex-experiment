@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Experiment } from '../models/experiment';
 import * as fromState from '../store/reducers';
-import { GoogleChartComponent } from 'angular-google-charts';
+import { ChartSelectEvent } from 'ng2-google-charts';
+import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 
 @Component({
   selector: 'app-analysis',
@@ -17,6 +18,8 @@ export class AnalysisComponent implements OnInit {
   data:Array<Array<any>>;
   columnNames = ['Stop Loss','Profit'];
   options = {
+    title:"Analysis",
+    legend: 'none',
     hAxis:
     {
       title:"Stop Loss"
@@ -28,6 +31,12 @@ export class AnalysisComponent implements OnInit {
     series: {
       1: {curveType: 'function'}
     }
+  };
+
+  public analysisChart: GoogleChartInterface = {
+    chartType: this.type,
+    dataTable: this.data,
+    options: this.options
   };
 
   constructor(private store: Store<fromState.State>) 
@@ -77,20 +86,34 @@ export class AnalysisComponent implements OnInit {
     this.title = "PL vs "+xvar;
     this.columnNames = [xvar,'Profit'];
     this.options = {
-    hAxis:
-    {
-      title:xvar
-    },
-    vAxis:
-    {
-      title:"Profit"
-    },
-    series: {
-      1: {curveType: 'function'}
-    }
-  };
+      title: this.title,
+      legend: 'none',
+      hAxis:
+      {
+        title:xvar
+      },
+      vAxis:
+      {
+        title:"Profit"
+      },
+      series: {
+        1: {curveType: 'function'}
+      }
+    };
 
+    this.data.unshift([xvar,"Profit"]);
 
+    this.analysisChart={
+      chartType: this.type,
+      dataTable: this.data,
+      options: this.options
+    };
+  }
+
+  onSelect(event:ChartSelectEvent)
+  {
+      //alert(event.column);
+      console.log(event.selectedRowValues);
   }
 
 
