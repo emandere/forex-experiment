@@ -14,6 +14,7 @@
     [height] = "400"
     >
   </google-chart>-->
+  <google-chart [data]="analysisChart" (chartSelect)="onSelect($event)"></google-chart>
 </mat-card-content>
 </mat-card>
 <mat-list>

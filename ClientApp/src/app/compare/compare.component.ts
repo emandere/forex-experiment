@@ -3,6 +3,8 @@ import {Observable} from 'rxjs/Rx';
 import { Experiment } from '../models/experiment';
 import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
+import { ChartSelectEvent } from 'ng2-google-charts';
+import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 
 import * as fromState from '../store/reducers';
 import {Variable} from '../models/experiment';
@@ -20,6 +22,7 @@ export class CompareComponent implements OnInit {
   data:Array<Array<any>>;
   columnNames = ['Stop Loss','Profit'];
   options = {
+    title: this.title,
     hAxis:
     {
       title:"Stop Loss"
@@ -31,9 +34,14 @@ export class CompareComponent implements OnInit {
     series: {
       1: {curveType: 'function'}
     },
-    legend:{
-      position:"bottom"
-    }
+    legend: { position: 'top', maxLines: 3 },
+    height: 400
+  };
+
+  public analysisChart: GoogleChartInterface = {
+    chartType: this.type,
+    dataTable: this.data,
+    options: this.options
   };
 
   constructor(private store: Store<fromState.State>) { }
@@ -55,7 +63,11 @@ export class CompareComponent implements OnInit {
     )
   }
 
-  
+  onSelect(event:ChartSelectEvent)
+  {
+      //alert(event.column);
+      console.log(event.columnLabel);
+  }
 
   setupCompare(experiments:Experiment[])
   {
@@ -102,25 +114,34 @@ export class CompareComponent implements OnInit {
     this.title = "PL vs "+xvar;
     this.columnNames = headers;
     this.options = {
-     
-    hAxis:
-    {
-      title:xvar
-    },
-    vAxis:
-    {
-      title:"Profit"
-    },
-    series: {
-      1: {curveType: 'function'}
-    
-    },
-    legend:{
-      position:"bottom"
-    }
+      title: this.title,
+      hAxis:
+      {
+        title:xvar
+      },
+      vAxis:
+      {
+        title:"Profit"
+      },
+      series: {
+        1: {curveType: 'function'}
+      
+      },
+      legend: { position: 'top', maxLines: 3 },
+      height: 400
+
+      
+    };
 
     
-  };
+
+    this.data.unshift(headers);
+
+    this.analysisChart={
+      chartType: this.type,
+      dataTable: this.data,
+      options: this.options
+    };
 
 
   }
