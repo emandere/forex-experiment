@@ -6,7 +6,7 @@ RUN dotnet restore
 
 # Copy everything else and build
 COPY . ./
-
+RUN cd /app/ClientApp/ && npm install
 RUN cd /app/ClientApp/ && npm run build -- --output-path=/app/ClientApp/dist --configuration production
 
 
