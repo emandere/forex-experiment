@@ -98,7 +98,8 @@ namespace forex_experiment.Mapper
                    experiment.sessions.Add(new Domain.SessionAnalysis
                                         {
                                             PL=lastBalance - firstBalance,
-                                            SessionStrategy = _mapper.Map<Strategy>(session.Strategy)
+                                            SessionStrategy = _mapper.Map<Strategy>(session.Strategy),
+                                            Id = session.Id
                                         });
 
 

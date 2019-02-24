@@ -43,6 +43,7 @@ export class SessionAnalysis
 {
     PL:number;
     SessionStrategy:Strategy;
+    Id:string;
 }
 export class Experiment
 {

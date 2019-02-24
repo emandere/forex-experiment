@@ -67,6 +67,20 @@ export class CompareComponent implements OnInit {
   {
       //alert(event.column);
       console.log(event.columnLabel);
+      console.log(event.selectedRowValues);
+      console.log(event.selectedRowFormattedValues);
+      this.experiments$.subscribe(
+        result => this.findSession(result,event)
+      )
+  }
+
+  findSession(experiments:Experiment[],event:ChartSelectEvent)
+  {
+      let experiment = experiments.find(x=>x.name==event.columnLabel);
+      let pos = experiments.findIndex(x=>x.name==event.columnLabel);
+      let session = experiment.sessions.find(x=>x.PL==event.selectedRowValues[pos+1]);
+      console.log(session.Id);
+      
   }
 
   setupCompare(experiments:Experiment[])
