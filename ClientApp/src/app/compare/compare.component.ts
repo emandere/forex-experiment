@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
+import {take} from 'rxjs/operators';
 import { Experiment } from '../models/experiment';
 import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
@@ -46,7 +47,10 @@ export class CompareComponent implements OnInit {
 
   constructor(private store: Store<fromState.State>) { }
   
-  
+  ngOnDestroy()
+  {
+     
+  }
 
   ngOnInit() {
     if(window.innerWidth < 450)
@@ -69,7 +73,7 @@ export class CompareComponent implements OnInit {
       console.log(event.columnLabel);
       console.log(event.selectedRowValues);
       console.log(event.selectedRowFormattedValues);
-      this.experiments$.subscribe(
+      this.experiments$.pipe(take(1)).subscribe(
         result => this.findSession(result,event)
       )
   }
