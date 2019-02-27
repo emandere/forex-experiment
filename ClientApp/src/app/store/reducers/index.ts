@@ -49,3 +49,4 @@ export const getExperimentsForCompare = (state:State) => state.experiment
 export const getExperimentsForCreate = (state:State) => state.experiment.experimentCreate;
 export const getExperimentsForManage = (state:State) => state.experiment.experimentsManage;
 export const getSessions = (state:State) => state.sessions.sessions;
+export const getForexSession = (state:State) => state.sessions.forexSession

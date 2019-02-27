@@ -8,6 +8,7 @@ import { ChartSelectEvent } from 'ng2-google-charts';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 
 import * as fromState from '../store/reducers';
+import * as sessionActions from '../store/actions/sessions.actions';
 import {Variable} from '../models/experiment';
 
 @Component({
@@ -84,6 +85,10 @@ export class CompareComponent implements OnInit {
       let pos = experiments.findIndex(x=>x.name==event.columnLabel);
       let session = experiment.sessions.find(x=>x.PL==event.selectedRowValues[pos+1]);
       console.log(session.Id);
+      this.store.dispatch(new sessionActions.LoadForexSession(session.Id));
+      this.store.select(fromState.getForexSession).pipe(take(1)).subscribe(
+       result => console.log(result.EndDate) 
+      )
       
   }
 
