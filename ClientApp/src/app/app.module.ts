@@ -35,6 +35,7 @@ import { QueueComponent } from './queue/queue.component';
 import { SessionsEffects } from './store/effects/sessions.effects';
 import { SessionComponent } from './session/session.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { ForexSessionComponent } from './forex-session/forex-session.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     ExperimentDetailComponent,
     CompareComponent,
     QueueComponent,
-    SessionComponent
+    SessionComponent,
+    ForexSessionComponent
   ],
   imports: [
     BrowserModule,

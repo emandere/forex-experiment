@@ -9,7 +9,7 @@ import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces
 
 import * as fromState from '../store/reducers';
 import * as sessionActions from '../store/actions/sessions.actions';
-import {Variable} from '../models/experiment';
+import {ForexSession} from '../models/session';
 
 @Component({
   selector: 'app-compare',
@@ -18,6 +18,7 @@ import {Variable} from '../models/experiment';
 })
 export class CompareComponent implements OnInit {
   chartWidth: number;
+  forexSession$:Observable<ForexSession>;
   experiments$: Observable<Experiment[]>;
   title:string = "PL vs Stop Loss";
   type:string ="LineChart";
@@ -86,9 +87,7 @@ export class CompareComponent implements OnInit {
       let session = experiment.sessions.find(x=>x.PL==event.selectedRowValues[pos+1]);
       console.log(session.Id);
       this.store.dispatch(new sessionActions.LoadForexSession(session.Id));
-      this.store.select(fromState.getForexSession).pipe(take(1)).subscribe(
-       result => console.log(result.EndDate) 
-      )
+      this.forexSession$=this.store.select(fromState.getForexSession);
       
   }
 
