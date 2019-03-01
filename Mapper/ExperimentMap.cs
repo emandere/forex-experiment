@@ -35,6 +35,8 @@ namespace forex_experiment.Mapper
         public async Task<ForexSession> GetForexSession(string sessionId)
         {
             var result = await _context.ForexSessions.Find((s)=>s.Id==sessionId).SingleOrDefaultAsync();
+            result.StartDate = DateTime.Parse(result.StartDate).ToString("yyyy-MM-dd");
+            result.EndDate = DateTime.Parse(result.EndDate).ToString("yyyy-MM-dd");
             return result;
         }
 
