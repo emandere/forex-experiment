@@ -43,13 +43,13 @@ namespace forex_experiment.Repository
             await _context.Experiments.DeleteOneAsync(item=>item.name==name);
         }
 
-        public async Task<List<ForexSession>> GetForexSessions(string experimentId)
+        public async Task<List<ForexSessionMongo>> GetForexSessions(string experimentId)
         {
             var result = await _context.ForexSessions.Find((s)=>s.ExperimentId==experimentId).ToListAsync();
             return result;
         }
 
-         public async Task<List<ForexSession>> GetForexSessions()
+         public async Task<List<ForexSessionMongo>> GetForexSessions()
         {
             var result = await _context.ForexSessions.Find(_=>true).ToListAsync();
             return result;

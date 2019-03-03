@@ -26,19 +26,24 @@ namespace forex_experiment.Mapper
             _context = new ForexContext(settings);;
         }
 
-        public async Task<List<ForexSession>> GetForexSessions(string experimentId)
+        public async Task<List<ForexSessionMongo>> GetForexSessions(string experimentId)
         {
             var result = await _context.ForexSessions.Find((s)=>s.ExperimentId==experimentId).ToListAsync();
             return result;
         }
 
-        public async Task<ForexSession> GetForexSession(string sessionId)
+        public async Task<ForexSessionMongo> GetForexSessionMongo(string sessionId)
         {
             var result = await _context.ForexSessions.Find((s)=>s.Id==sessionId).SingleOrDefaultAsync();
-            result.StartDate = DateTime.Parse(result.StartDate).ToString("yyyy-MM-dd");
-            result.EndDate = DateTime.Parse(result.EndDate).ToString("yyyy-MM-dd");
             return result;
         }
+
+        public async Task<ForexSession> GetForexSession(string sessionId)
+        {
+            var result = _mapper.Map<ForexSession>(await GetForexSessionMongo(sessionId));
+            return result;
+        }
+
 
         public async Task<IEnumerable<ForexExperiment>> GetExperiments()
         {
@@ -81,7 +86,7 @@ namespace forex_experiment.Mapper
                 }
                     
                 
-                foreach(ForexSession session in sessions)
+                foreach(ForexSessionMongo session in sessions)
                 {
                     double firstBalance = session
                                             .SessionUser
@@ -151,7 +156,7 @@ namespace forex_experiment.Mapper
             List<TradingSession> tradingSessions = await _context.TradingSessionQueue.Find(x=>x.Read==true).ToListAsync();
             foreach(TradingSession tradingSession in tradingSessions)
             {
-                ForexSession session = await GetForexSession(tradingSession.Name);
+                ForexSessionMongo session = await GetForexSessionMongo(tradingSession.Name);
                 if(session!=null)
                     tradingSession.percentcomplete = session.PercentComplete;
             }
@@ -173,7 +178,7 @@ namespace forex_experiment.Mapper
                                                                  .ToListAsync();
             foreach(TradingSession tradingSession in tradingSessions)
             {
-                ForexSession session = await GetForexSession(tradingSession.Name);
+                ForexSessionMongo session = await GetForexSessionMongo(tradingSession.Name);
                 if(session!=null)
                     tradingSession.percentcomplete = session.PercentComplete;
             }

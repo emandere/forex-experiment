@@ -11,7 +11,7 @@ namespace forex_experiment.Repository
         Task AddExperiment(ForexExperimentMongo item);
         Task PushTradingStrategySession(TradingSession item);
         Task DeleteExperiment(string name);
-        Task<List<ForexSession>> GetForexSessions();
-        Task<List<ForexSession>> GetForexSessions(string experimentId);
+        Task<List<ForexSessionMongo>> GetForexSessions();
+        Task<List<ForexSessionMongo>> GetForexSessions(string experimentId);
     }
 }

@@ -69,6 +69,7 @@ namespace forex_experiment
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ForexExperimentProfile());
+                cfg.AddProfile(new ForexSessionProfile());
             });
             IMapper mapper = config.CreateMapper();
             

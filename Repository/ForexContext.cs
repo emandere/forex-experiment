@@ -30,11 +30,11 @@ namespace forex_experiment.Repository
             }
         }
 
-        public IMongoCollection<ForexSession> ForexSessions
+        public IMongoCollection<ForexSessionMongo> ForexSessions
         {
             get
             {
-                return _database.GetCollection<ForexSession>("session");
+                return _database.GetCollection<ForexSessionMongo>("session");
             }
         }
     }
