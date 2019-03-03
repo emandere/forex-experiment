@@ -132,6 +132,10 @@ namespace forex_experiment.Domain
 
 
         public bool Init { get; set; }
+
+        public double PL { get; set; }
+
+        
     }
 
     public  class Order

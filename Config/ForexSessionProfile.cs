@@ -38,7 +38,15 @@ namespace forex_experiment.Config
             CreateMap<BalanceHistoryMongo,BalanceHistory>();
 
             CreateMap<Trade,TradeMongo>();
-            CreateMap<TradeMongo,Trade>();
+            CreateMap<TradeMongo,Trade>()
+                 .ForMember
+                ( dest=>dest.PL, opts=>opts.MapFrom
+                        (
+                            src => src.PLCalc()
+                        )
+                       
+                )
+            ;
 
             CreateMap<Order,OrderMongo>();
             CreateMap<OrderMongo,Order>();

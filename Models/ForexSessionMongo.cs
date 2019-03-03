@@ -165,6 +165,24 @@ namespace forex_experiment.Models
 
         [BsonElement("init")]
         public bool Init { get; set; }
+
+        double Position()
+        {
+            if(Long)
+                return 1.0;
+            else
+                return -1.0;
+        }
+
+        double adj()
+        {
+            double adj= (Pair=="USDJPY") ? 0.01 : 1.0;
+            return adj;
+        }
+        public double PLCalc()
+        {
+            return Units * Position() * (ClosePrice - OpenPrice)*adj();
+        }
     }
 
     public  class OrderMongo
