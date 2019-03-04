@@ -18,32 +18,32 @@
                     <tr>
                         <td><div class ="sessioninfo">Start Amount</div></td>
                         <td></td>
-                        <td><div class ="sessioninfo">Percent Complete</div></td>
+                        <td><div class ="sessioninfo">End Amount</div></td>
                     </tr>
                     <tr>
                         <td>{{sessionInfo.SessionUser.Accounts.Primary.BalanceHistory[0].Amount}}</td>
                         <td></td>
-                        <td>{{sessionInfo.PercentComplete}}</td>
+                        <td>{{sessionInfo.SessionUser.Accounts.Primary.BalanceHistory[sessionInfo.SessionUser.Accounts.Primary.BalanceHistory.length-1].Amount}}</td>
                     </tr>
                     <tr>
-                        <td><div class ="sessioninfo">Read</div></td>
+                        <td><div class ="sessioninfo">Percent Complete</div></td>
                         <td></td>
                         <td><div class ="sessioninfo">Experiment Id</div></td>
                     </tr>
                     <tr>
-                        <td>true</td>
+                        <td>{{sessionInfo.PercentComplete}}</td>
                         <td></td>
                         <td>{{sessionInfo.ExperimentId}}</td>
                     </tr>
                     <tr>
-                        <td><div class ="sessioninfo">Window</div></td>
-                        <td></td>
                         <td><div class ="sessioninfo">Rule</div></td>
+                        <td></td>
+                        <td><div class ="sessioninfo">Window</div></td>
                     </tr>
                     <tr>
-                        <td>{{sessionInfo.Strategy.window}}</td>
-                        <td></td>
                         <td>{{sessionInfo.Strategy.ruleName}}</td>
+                        <td></td>
+                        <td>{{sessionInfo.Strategy.window}}</td>
                     </tr>
                     <tr>
                             <td><div class ="sessioninfo">Stop Loss</div></td>

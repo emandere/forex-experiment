@@ -36,6 +36,7 @@ import { SessionsEffects } from './store/effects/sessions.effects';
 import { SessionComponent } from './session/session.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { ForexSessionComponent } from './forex-session/forex-session.component';
+import { ForexSessionAnalysisComponent } from './forex-session-analysis/forex-session-analysis.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ForexSessionComponent } from './forex-session/forex-session.component';
     CompareComponent,
     QueueComponent,
     SessionComponent,
-    ForexSessionComponent
+    ForexSessionComponent,
+    ForexSessionAnalysisComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { ForexSessionComponent } from './forex-session/forex-session.component';
       { path: 'compare',component: CompareComponent},
       { path: 'manage-experiments', component: ManageExperimentsComponent },
       { path: 'queue', component: QueueComponent },
+      { path: 'session-analysis', component: ForexSessionAnalysisComponent },
       { path: 'create-experiment', component: CreateExperimentComponent }
     ]),
     MatButtonModule,
