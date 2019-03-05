@@ -91,6 +91,7 @@ export interface Trade {
     StopLoss:   number;
     TakeProfit: number;
     Init:       boolean;
+    PL:         number;
 }
 
 export enum Pair {
