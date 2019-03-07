@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Experiment } from '../models/experiment';
-import * as fromState from '../store/reducers';
 import { ChartSelectEvent } from 'ng2-google-charts';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+import { Router } from '@angular/router';
+
+
+import { Experiment } from '../models/experiment';
+import * as fromState from '../store/reducers';
+import * as sessionActions from '../store/actions/sessions.actions';
 
 @Component({
   selector: 'app-analysis',
@@ -39,7 +43,7 @@ export class AnalysisComponent implements OnInit {
     options: this.options
   };
 
-  constructor(private store: Store<fromState.State>) 
+  constructor(private store: Store<fromState.State>,private router:Router) 
   {
 
   }
@@ -114,6 +118,16 @@ export class AnalysisComponent implements OnInit {
   {
       //alert(event.column);
       console.log(event.selectedRowValues);
+      this.findSession(event);
+      this.router.navigate(['/session-analysis']);
+  }
+
+  findSession(event:ChartSelectEvent)
+  {
+      let session = this.experiment.sessions.find(x=>x.PL==event.selectedRowValues[1]);
+      console.log(session.Id);
+      this.store.dispatch(new sessionActions.LoadForexSession(session.Id));
+      
   }
 
 
