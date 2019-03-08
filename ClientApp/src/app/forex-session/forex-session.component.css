@@ -9,3 +9,7 @@
       font-size: x-small;
       margin-right: 10px;
   }
+
+  .history-chart-card {
+    max-width: 900px;
+  }

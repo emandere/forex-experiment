@@ -35,7 +35,15 @@ namespace forex_experiment.Config
             CreateMap<AccountMongo,Account>();
 
             CreateMap<BalanceHistory,BalanceHistoryMongo>();
-            CreateMap<BalanceHistoryMongo,BalanceHistory>();
+            CreateMap<BalanceHistoryMongo,BalanceHistory>()
+                .ForMember
+                (
+                   dest=>dest.Date, opts=>opts.MapFrom
+                        (
+                            src => DateTime.Parse(src.Date).ToString("yyyy-MM-dd")
+                        )
+                )    
+            ;
 
             CreateMap<Trade,TradeMongo>();
             CreateMap<TradeMongo,Trade>()
