@@ -1,1 +1,3 @@
-<app-forex-session *ngIf="(forexSession$ | async)!==null" [sessionInfo]="(forexSession$ | async)" ></app-forex-session>
+<div *ngIf='(this.forexSession$ | async)!==null'> 
+    <app-forex-session ></app-forex-session>
+</div>

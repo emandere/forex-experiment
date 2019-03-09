@@ -119,7 +119,6 @@ export class AnalysisComponent implements OnInit {
       //alert(event.column);
       console.log(event.selectedRowValues);
       this.findSession(event);
-      this.router.navigate(['/session-analysis']);
   }
 
   findSession(event:ChartSelectEvent)
@@ -127,7 +126,7 @@ export class AnalysisComponent implements OnInit {
       let session = this.experiment.sessions.find(x=>x.PL==event.selectedRowValues[1]);
       console.log(session.Id);
       this.store.dispatch(new sessionActions.LoadForexSession(session.Id));
-      
+      this.router.navigate(['/session-analysis']);
   }
 
 

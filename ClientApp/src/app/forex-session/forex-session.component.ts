@@ -1,6 +1,9 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { ForexSession } from '../models/session';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+import {Observable} from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
+import * as fromState from '../store/reducers';
+import {ForexSession} from '../models/session';
 
 @Component({
   selector: 'app-forex-session',
@@ -11,16 +14,25 @@ import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces
 
 
 export class ForexSessionComponent implements OnInit {
-  @Input() sessionInfo:ForexSession;
+  public forexSession$:Observable<ForexSession>;
   public pLHistogramChart:SessionPLHistogramChart;
   public plHistGoogleChart: GoogleChartInterface = null;
   public balanceHistoryChart:SessionBalanceHistoryChart;
   public balanceHistoryGoogleChart: GoogleChartInterface = null;
-  constructor() { }
+  constructor(private store:Store<fromState.State>) { }
 
   ngOnInit() {
+    this.forexSession$=this.store.select(fromState.getForexSession);
+    this.forexSession$.subscribe(
+      sess=>{
+        this.setupCharts(sess);
+      }
+    )
+  }
+
+  setupCharts(sessionInfo:ForexSession) {
     this.pLHistogramChart=new SessionPLHistogramChart();
-    this.pLHistogramChart.data = this.sessionInfo
+    this.pLHistogramChart.data = sessionInfo
                     .SessionUser
                     .Accounts
                     .Primary
@@ -36,7 +48,7 @@ export class ForexSessionComponent implements OnInit {
     };
 
     this.balanceHistoryChart=new SessionBalanceHistoryChart();
-    this.balanceHistoryChart.data = this.sessionInfo
+    this.balanceHistoryChart.data = sessionInfo
                       .SessionUser
                       .Accounts
                       .Primary

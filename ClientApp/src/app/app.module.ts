@@ -37,6 +37,7 @@ import { SessionComponent } from './session/session.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { ForexSessionComponent } from './forex-session/forex-session.component';
 import { ForexSessionAnalysisComponent } from './forex-session-analysis/forex-session-analysis.component';
+import { ForexSessionDetailComponent } from './forex-session-detail/forex-session-detail.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ForexSessionAnalysisComponent } from './forex-session-analysis/forex-se
     QueueComponent,
     SessionComponent,
     ForexSessionComponent,
-    ForexSessionAnalysisComponent
+    ForexSessionAnalysisComponent,
+    ForexSessionDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+.session-card {
+    max-width: 400px;
+  }
+
+  .sessioninfo
+  {
+      font-family: Inconsolata, monospace;
+      color:blue;
+      font-size: x-small;
+      margin-right: 10px;
+  }

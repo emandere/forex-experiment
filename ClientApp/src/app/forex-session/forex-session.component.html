@@ -1,78 +1,7 @@
-<br/>
-<mat-card class="session-card">
-    <mat-card-header>
-        <mat-card-title>{{sessionInfo.Id}}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-            <table  style="width:280px;margin-left:50px">
-                    <tr>
-                        <td><div class ="sessioninfo">Start Date</div></td>
-                        <td></td>
-                        <td><div class ="sessioninfo">Current Date</div></td>
-                    </tr>
-                    <tr>
-                        <td>{{sessionInfo.StartDate}}</td>
-                        <td></td>
-                        <td>{{sessionInfo.EndDate}}</td>
-                    </tr>
-                    <tr>
-                        <td><div class ="sessioninfo">Start Amount</div></td>
-                        <td></td>
-                        <td><div class ="sessioninfo">End Amount</div></td>
-                    </tr>
-                    <tr>
-                        <td>{{sessionInfo.SessionUser.Accounts.Primary.BalanceHistory[0].Amount}}</td>
-                        <td></td>
-                        <td>{{sessionInfo.SessionUser.Accounts.Primary.BalanceHistory[sessionInfo.SessionUser.Accounts.Primary.BalanceHistory.length-1].Amount}}</td>
-                    </tr>
-                    <tr>
-                        <td><div class ="sessioninfo">Percent Complete</div></td>
-                        <td></td>
-                        <td><div class ="sessioninfo">Experiment Id</div></td>
-                    </tr>
-                    <tr>
-                        <td>{{sessionInfo.PercentComplete}}</td>
-                        <td></td>
-                        <td>{{sessionInfo.ExperimentId}}</td>
-                    </tr>
-                    <tr>
-                        <td><div class ="sessioninfo">Rule</div></td>
-                        <td></td>
-                        <td><div class ="sessioninfo">Window</div></td>
-                    </tr>
-                    <tr>
-                        <td>{{sessionInfo.Strategy.ruleName}}</td>
-                        <td></td>
-                        <td>{{sessionInfo.Strategy.window}}</td>
-                    </tr>
-                    <tr>
-                            <td><div class ="sessioninfo">Stop Loss</div></td>
-                            <td></td>
-                            <td><div class ="sessioninfo">Take Profit</div></td>
-                    </tr>
-                    <tr>
-                        <td>{{sessionInfo.Strategy.stopLoss}}</td>
-                        <td></td>
-                        <td>{{sessionInfo.Strategy.takeProfit}}</td>
-                    </tr>
-                    <tr>
-                            <td><div class ="sessioninfo">Units</div></td>
-                            <td></td>
-                            <td><div class ="sessioninfo">Position</div></td>
-                    </tr>
-                    <tr>
-                        <td>{{sessionInfo.Strategy.units}}</td>
-                        <td></td>
-                        <td>{{sessionInfo.Strategy.position}}</td>
-                    </tr>
-            </table>
-      </mat-card-content> 
-
-</mat-card>
-<br/>
+<app-forex-session-detail *ngIf='(this.forexSession$|async)!==undefined' [sessionInfo]="this.forexSession$ | async"></app-forex-session-detail>
 <mat-card  class="session-card">
     <mat-card-header>
-        <mat-card-title>PL Histogram {{sessionInfo.Id}}</mat-card-title>
+        <mat-card-title>PL Histogram</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <google-chart [data]="plHistGoogleChart"></google-chart>
@@ -81,7 +10,7 @@
 <br/>
 <mat-card  class="history-chart-card">
     <mat-card-header>
-        <mat-card-title>PL Balance History {{sessionInfo.Id}}</mat-card-title>
+        <mat-card-title>PL Balance History</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <google-chart [data]="balanceHistoryGoogleChart"></google-chart>
