@@ -2,20 +2,10 @@
 <mat-card *ngIf='(experiments$ | async)?.length>0' class="experiment-chart-card">
     <mat-card-header>
         <mat-card-title>Experiment Results</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-  <!--<google-chart
-    [title]="title"
-    [type]="type"
-    [data]="data"
-    [options] = "options"
-    [columnNames] = "columnNames"
-    [width] = "chartWidth"
-    [height] = "400"
-    >
-  </google-chart>-->
-  <google-chart [data]="analysisChart" (chartSelect)="onSelect($event)"></google-chart>
-</mat-card-content>
+    </mat-card-header>
+    <mat-card-content>
+        <google-chart [data]="analysisChart" (chartSelect)="onSelect($event)"></google-chart>
+    </mat-card-content>
 </mat-card>
 <mat-list>
   <ng-container *ngFor="let experiment of experiments$ | async">

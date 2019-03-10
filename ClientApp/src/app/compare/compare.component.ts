@@ -6,10 +6,11 @@ import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import { ChartSelectEvent } from 'ng2-google-charts';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+import { Router } from '@angular/router';
+
 
 import * as fromState from '../store/reducers';
 import * as sessionActions from '../store/actions/sessions.actions';
-import {ForexSession} from '../models/session';
 
 @Component({
   selector: 'app-compare',
@@ -18,7 +19,6 @@ import {ForexSession} from '../models/session';
 })
 export class CompareComponent implements OnInit {
   chartWidth: number;
-  forexSession$:Observable<ForexSession>;
   experiments$: Observable<Experiment[]>;
   title:string = "PL vs Stop Loss";
   type:string ="LineChart";
@@ -47,7 +47,7 @@ export class CompareComponent implements OnInit {
     options: this.options
   };
 
-  constructor(private store: Store<fromState.State>) { }
+  constructor(private store: Store<fromState.State>, private router:Router) { }
   
   ngOnDestroy()
   {
@@ -85,10 +85,8 @@ export class CompareComponent implements OnInit {
       let experiment = experiments.find(x=>x.name==event.columnLabel);
       let pos = experiments.findIndex(x=>x.name==event.columnLabel);
       let session = experiment.sessions.find(x=>x.PL==event.selectedRowValues[pos+1]);
-      console.log(session.Id);
       this.store.dispatch(new sessionActions.LoadForexSession(session.Id));
-      this.forexSession$=this.store.select(fromState.getForexSession);
-      
+      this.router.navigate(['/session-analysis']);
   }
 
   setupCompare(experiments:Experiment[])
