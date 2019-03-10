@@ -2,6 +2,7 @@ ng generate component
 ng generate action store/actions/auth
 ng generate reducer store/reducers/auth --reducers index.ts
 ng generate effect store/effects/auth --module app.module --root true
+docker login
 docker.exe push emandere/forex-experiment-base:latest
 docker.exe build -t emandere/forex-experiment-base -f Dockerfile.base github.com/emandere/forex-experiment
 mongorestore --gzip --archive=testdbdownload.gz --db testdb 
