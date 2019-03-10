@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {Session} from '../models/session';
+import {ForexSession} from '../models/session';
 
 @Component({
   selector: 'app-forex-session-detail',
@@ -7,7 +7,7 @@ import {Session} from '../models/session';
   styleUrls: ['./forex-session-detail.component.css']
 })
 export class ForexSessionDetailComponent implements OnInit {
-  @Input() sessionInfo:Session;
+  @Input() sessionInfo:ForexSession;
   constructor() { }
 
   ngOnInit() {
