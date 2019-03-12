@@ -3,7 +3,7 @@ import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces
 import {Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import * as fromState from '../store/reducers';
-import {ForexSession} from '../models/session';
+import {ForexSession, Trade} from '../models/session';
 
 @Component({
   selector: 'app-forex-session',
@@ -16,7 +16,9 @@ import {ForexSession} from '../models/session';
 export class ForexSessionComponent implements OnInit {
   public forexSession$:Observable<ForexSession>;
   public pLHistogramChart:SessionPLHistogramChart;
+  public lengthHistogram:SessionTradeLengthHistogramChart;
   public plHistGoogleChart: GoogleChartInterface = null;
+  public lengthHistGoogleChart: GoogleChartInterface = null;
   public balanceHistoryChart:SessionBalanceHistoryChart;
   public balanceHistoryGoogleChart: GoogleChartInterface = null;
   constructor(private store:Store<fromState.State>) { }
@@ -28,6 +30,18 @@ export class ForexSessionComponent implements OnInit {
         this.setupCharts(sess);
       }
     )
+  }
+
+  dateDiff(trade:Trade):number
+  {
+    let openDate:Date = new Date(trade.OpenDate);
+    let closeDate:Date = new Date(trade.CloseDate);
+
+    let diff:number = Math.abs(openDate.getTime() - closeDate.getTime());
+    let diffDays:number = Math.ceil(diff / (1000 * 3600 * 24));         
+
+    return diffDays;
+
   }
 
   setupCharts(sessionInfo:ForexSession) {
@@ -44,6 +58,23 @@ export class ForexSessionComponent implements OnInit {
       chartType: this.pLHistogramChart.type,
       dataTable: this.pLHistogramChart.data,
       options: this.pLHistogramChart.options
+
+    };
+
+
+    this.lengthHistogram=new SessionTradeLengthHistogramChart();
+    this.lengthHistogram.data = sessionInfo
+                    .SessionUser
+                    .Accounts
+                    .Primary
+                    .ClosedTrades
+                    .map((trade)=>[trade.Pair+trade.OpenDate,this.dateDiff(trade)]);
+    this.lengthHistogram.data.unshift(["Trade","Days"]);
+
+    this.lengthHistGoogleChart={
+      chartType: this.lengthHistogram.type,
+      dataTable: this.lengthHistogram.data,
+      options: this.lengthHistogram.options
 
     };
 
@@ -65,6 +96,8 @@ export class ForexSessionComponent implements OnInit {
 
 }
 
+
+
 export class SessionPLHistogramChart
 {
   title:string = "PL vs Stop Loss";
@@ -81,6 +114,27 @@ export class SessionPLHistogramChart
     vAxis:
     {
       title:"Number of Trades"
+    },
+    height: 400
+  };
+}
+
+export class SessionTradeLengthHistogramChart
+{
+  title:string = "Trade duration";
+  type:string ="Histogram";
+  data:Array<Array<any>>=null;
+  columnNames = ['Stop Loss','Profit'];
+  options = {
+    title: this.title,
+    legend: { position: 'none' },
+    hAxis:
+    {
+      title:"# of Trades"
+    },
+    vAxis:
+    {
+      title:"days"
     },
     height: 400
   };
