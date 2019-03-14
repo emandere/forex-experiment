@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
+import { interval } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 import * as fromState from '../store/reducers';
+import * as sessionActions from '../store/actions/sessions.actions';
 import {ForexSession} from '../models/session';
 
 @Component({
@@ -15,7 +19,18 @@ export class ForexSessionAnalysisComponent implements OnInit {
   constructor(private store: Store<fromState.State>) { }
 
   ngOnInit() {
-    this.forexSession$=this.store.select(fromState.getForexSession);
+    interval(3000).pipe(
+      map(t=>{
+          this.forexSession$=this.store.select(fromState.getForexSession);
+          this.forexSession$.pipe(take(1)).subscribe(
+              f=>{
+                if(f!=null){
+                  this.store.dispatch(new  sessionActions.LoadForexSession(f.Id));
+                }
+              }
+          )
+        })
+    ).subscribe()  
   }
 
 }
