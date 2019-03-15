@@ -2,6 +2,10 @@
     max-width: 400px;
   }
 
+  .session-bar-card {
+    max-width: 600px;
+  }
+
   .sessioninfo
   {
       font-family: Inconsolata, monospace;

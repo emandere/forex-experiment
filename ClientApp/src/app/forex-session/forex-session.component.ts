@@ -14,12 +14,14 @@ import {ForexSession, Trade} from '../models/session';
 
 
 export class ForexSessionComponent implements OnInit {
-  public forexSession$:Observable<ForexSession>;
-  public pLHistogramChart:SessionPLHistogramChart;
-  public lengthHistogram:SessionTradeLengthHistogramChart;
-  public plHistGoogleChart: GoogleChartInterface = null;
-  public lengthHistGoogleChart: GoogleChartInterface = null;
-  public balanceHistoryChart:SessionBalanceHistoryChart;
+  public forexSession$:             Observable<ForexSession>;
+  public pLHistogramChart:          SessionPLHistogramChart;
+  public pLByPairHistogramChart:    SessionPLByPairHistogramChart;
+  public lengthHistogram:           SessionTradeLengthHistogramChart;
+  public plHistGoogleChart:         GoogleChartInterface = null;
+  public plByPairHistGoogleChart:   GoogleChartInterface = null;
+  public lengthHistGoogleChart:     GoogleChartInterface = null;
+  public balanceHistoryChart:       SessionBalanceHistoryChart;
   public balanceHistoryGoogleChart: GoogleChartInterface = null;
   constructor(private store:Store<fromState.State>) { }
 
@@ -42,6 +44,19 @@ export class ForexSessionComponent implements OnInit {
 
     return diffDays;
 
+  }
+
+  sumPL(pair:string,trades:Trade[]):number
+  {
+      return trades.filter(trade=>trade.Pair==pair)
+                    .map(trade=>trade.PL)
+                    .reduce((acc,pl)=>acc+pl);
+  }
+
+  uniquePairs(trades:Trade[]):string[]
+  {
+     let setvalues = new Set(trades.map(trade=>trade.Pair)).values();
+     return Array.from(setvalues);
   }
 
   setupCharts(sessionInfo:ForexSession) {
@@ -78,6 +93,24 @@ export class ForexSessionComponent implements OnInit {
 
     };
 
+
+    let closedTrades =sessionInfo
+                      .SessionUser
+                      .Accounts
+                      .Primary
+                      .ClosedTrades;
+    this.pLByPairHistogramChart=new  SessionPLByPairHistogramChart();
+    this.pLByPairHistogramChart.data = this.uniquePairs(closedTrades)
+                    .map((pair)=>[pair,this.sumPL(pair,closedTrades)]);
+    this.pLByPairHistogramChart.data.unshift(["PL","Pairs"]);
+
+    this.plByPairHistGoogleChart={
+      chartType: this.pLByPairHistogramChart.type,
+      dataTable: this.pLByPairHistogramChart.data,
+      options: this.pLByPairHistogramChart.options
+
+    };
+
     this.balanceHistoryChart=new SessionBalanceHistoryChart();
     this.balanceHistoryChart.data = sessionInfo
                       .SessionUser
@@ -97,6 +130,26 @@ export class ForexSessionComponent implements OnInit {
 }
 
 
+export class SessionPLByPairHistogramChart
+{
+  title:string = "PL vs Pair";
+  type:string ="Bar";
+  data:Array<Array<any>>=null;
+  columnNames = ['Pair','Stop Loss'];
+  options = {
+    title: this.title,
+    legend: { position: 'none' },
+    hAxis:
+    {
+      title:"Pairs"
+    },
+    vAxis:
+    {
+      title:"PL"
+    },
+    height: 400
+  };
+}
 
 export class SessionPLHistogramChart
 {
