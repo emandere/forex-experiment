@@ -24,7 +24,7 @@ export class ForexSessionAnalysisComponent implements OnInit {
           this.forexSession$=this.store.select(fromState.getForexSession);
           this.forexSession$.pipe(take(1)).subscribe(
               f=>{
-                if(f!=null){
+                if(f!=null && Number(f.PercentComplete)<100){
                   this.store.dispatch(new  sessionActions.LoadForexSession(f.Id));
                 }
               }
