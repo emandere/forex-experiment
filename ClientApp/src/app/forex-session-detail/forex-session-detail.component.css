@@ -9,3 +9,9 @@
       font-size: x-small;
       margin-right: 10px;
   }
+
+  .title{
+    font-family: Inconsolata, monospace;
+    font-weight: 600;
+    margin-right: 12px;
+}
