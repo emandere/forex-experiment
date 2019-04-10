@@ -38,6 +38,8 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { ForexSessionComponent } from './forex-session/forex-session.component';
 import { ForexSessionAnalysisComponent } from './forex-session-analysis/forex-session-analysis.component';
 import { ForexSessionDetailComponent } from './forex-session-detail/forex-session-detail.component';
+import { UsMapModule,UsMapComponent} from 'angular-us-map';
+import { ShowUsMapComponent } from './show-us-map/show-us-map.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { ForexSessionDetailComponent } from './forex-session-detail/forex-sessio
     SessionComponent,
     ForexSessionComponent,
     ForexSessionAnalysisComponent,
-    ForexSessionDetailComponent
+    ForexSessionDetailComponent,
+    ShowUsMapComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { ForexSessionDetailComponent } from './forex-session-detail/forex-sessio
       { path: 'manage-experiments', component: ManageExperimentsComponent },
       { path: 'queue', component: QueueComponent },
       { path: 'session-analysis', component: ForexSessionAnalysisComponent },
-      { path: 'create-experiment', component: CreateExperimentComponent }
+      { path: 'create-experiment', component: CreateExperimentComponent },
+      { path: 'show-us-map', component: ShowUsMapComponent }
     ]),
     MatButtonModule,
     MatMenuModule,
@@ -81,6 +85,7 @@ import { ForexSessionDetailComponent } from './forex-session-detail/forex-sessio
     MatProgressBarModule,
     FormsModule,
     Ng2GoogleChartsModule,
+    UsMapModule,
     /*GoogleChartsModule.forRoot(),*/
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([IndicatorsEffects, ExperimentEffects, SessionsEffects]),
