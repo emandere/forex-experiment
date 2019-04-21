@@ -8,9 +8,26 @@ import {ForexSession} from '../models/session';
 })
 export class ForexSessionDetailComponent implements OnInit {
   @Input() sessionInfo:ForexSession;
+  percentProfitable:number;
+  closedTrades:number;
   constructor() { }
 
   ngOnInit() {
+    let numProfitable:number = this.sessionInfo
+                                 .SessionUser
+                                 .Accounts
+                                 .Primary
+                                 .ClosedTrades
+                                 .filter((trade)=>trade.PL > 0)
+                                 .length;
+
+    this.closedTrades = this.sessionInfo
+                          .SessionUser
+                          .Accounts
+                          .Primary
+                          .ClosedTrades
+                          .length;
+    this.percentProfitable = ( numProfitable / this.closedTrades ) * 100;
   }
 
 }
