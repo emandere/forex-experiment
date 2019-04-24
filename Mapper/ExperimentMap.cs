@@ -88,27 +88,42 @@ namespace forex_experiment.Mapper
                 
                 foreach(ForexSessionMongo session in sessions)
                 {
-                    double firstBalance = session
-                                            .SessionUser
-                                            .Accounts
-                                            .Primary
-                                            .BalanceHistory
-                                            .First().Amount;
+                    if(session
+                        .SessionUser
+                        .Accounts
+                        .Primary
+                        .BalanceHistory.Length > 0)
+                    {    
+                        double firstBalance = session
+                                                .SessionUser
+                                                .Accounts
+                                                .Primary
+                                                .BalanceHistory
+                                                .First().Amount;
 
-                   double lastBalance = session
-                                            .SessionUser
-                                            .Accounts
-                                            .Primary
-                                            .BalanceHistory
-                                            .Last().Amount;
+                        double lastBalance = session
+                                                .SessionUser
+                                                .Accounts
+                                                .Primary
+                                                .BalanceHistory
+                                                .Last().Amount;
 
-                   experiment.sessions.Add(new Domain.SessionAnalysis
-                                        {
-                                            PL=lastBalance - firstBalance,
-                                            SessionStrategy = _mapper.Map<Strategy>(session.Strategy),
-                                            Id = session.Id
-                                        });
-
+                        experiment.sessions.Add(new Domain.SessionAnalysis
+                                            {
+                                                PL=lastBalance - firstBalance,
+                                                SessionStrategy = _mapper.Map<Strategy>(session.Strategy),
+                                                Id = session.Id
+                                            });
+                    }
+                    else
+                    {
+                        experiment.sessions.Add(new Domain.SessionAnalysis
+                                            {
+                                                PL=0,
+                                                SessionStrategy = _mapper.Map<Strategy>(session.Strategy),
+                                                Id = session.Id
+                                            });    
+                    }
 
                 }
 

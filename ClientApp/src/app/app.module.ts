@@ -14,6 +14,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatExpansionModule} from '@angular/material/expansion';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
@@ -78,6 +79,7 @@ import { ShowUsMapComponent } from './show-us-map/show-us-map.component';
     HttpClientModule,
     MatSidenavModule,
     MatSelectModule,
+    MatExpansionModule,
     MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,

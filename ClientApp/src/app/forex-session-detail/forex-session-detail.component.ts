@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnChanges,Input } from '@angular/core';
 import {ForexSession} from '../models/session';
 
 @Component({
@@ -6,13 +6,13 @@ import {ForexSession} from '../models/session';
   templateUrl: './forex-session-detail.component.html',
   styleUrls: ['./forex-session-detail.component.css']
 })
-export class ForexSessionDetailComponent implements OnInit {
+export class ForexSessionDetailComponent implements OnChanges {
   @Input() sessionInfo:ForexSession;
   percentProfitable:number;
   closedTrades:number;
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     let numProfitable:number = this.sessionInfo
                                  .SessionUser
                                  .Accounts
