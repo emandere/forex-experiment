@@ -7,3 +7,4 @@ docker.exe push emandere/forex-experiment-base:latest
 docker.exe build -t emandere/forex-experiment-base -f Dockerfile.base github.com/emandere/forex-experiment
 mongorestore --gzip --archive=testdbdownload.gz --db testdb 
 git rm -r --cached bin
+docker stack rm forex-services
