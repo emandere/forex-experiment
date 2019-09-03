@@ -1,3 +1,4 @@
+npm install @ngrx/store
 ng generate component
 ng generate action store/actions/auth
 ng generate reducer store/reducers/auth --reducers index.ts
