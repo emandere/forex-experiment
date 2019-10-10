@@ -9,3 +9,4 @@ docker.exe build -t emandere/forex-experiment-base -f Dockerfile.base github.com
 mongorestore --gzip --archive=testdbdownload.gz --db testdb 
 git rm -r --cached bin
 docker stack rm forex-services
+docker service scale combined-svcs_forex-experiment=1
